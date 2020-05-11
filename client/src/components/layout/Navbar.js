@@ -64,7 +64,7 @@ Navbar.propTypes = {
 
 Navbar.defaultProps = {
   title: "Scribblesave",
-  icon: "fas fa-id-card-alt",
+  icon: "far fa-sticky-note",
 };
 
 export default Navbar;

@@ -15,7 +15,7 @@ const Contacts = () => {
   }, []);
 
   if (contacts !== null && contacts.length === 0 && !loading) {
-    return <h4>Please add a contact</h4>;
+    return <h4>Please add a Scribble</h4>;
   }
 
   return (
@@ -25,28 +25,28 @@ const Contacts = () => {
           <div className="grid-3">
             {filtered !== null
               ? filtered.map((contact, index) => (
-                  <CSSTransition
-                    key={contact._id}
-                    timeout={500}
-                    classNames="item"
-                  >
-                    <ContactItem contact={contact} index={index} />
-                  </CSSTransition>
-                ))
+                <CSSTransition
+                  key={contact._id}
+                  timeout={500}
+                  classNames="item"
+                >
+                  <ContactItem contact={contact} index={index} />
+                </CSSTransition>
+              ))
               : contacts.map((contact, index) => (
-                  <CSSTransition
-                    key={contact._id}
-                    timeout={500}
-                    classNames="item"
-                  >
-                    <ContactItem contact={contact} index={index} />
-                  </CSSTransition>
-                ))}
+                <CSSTransition
+                  key={contact._id}
+                  timeout={500}
+                  classNames="item"
+                >
+                  <ContactItem contact={contact} index={index} />
+                </CSSTransition>
+              ))}
           </div>
         </TransitionGroup>
       ) : (
-        <Spinner />
-      )}
+          <Spinner />
+        )}
     </Fragment>
   );
 };
