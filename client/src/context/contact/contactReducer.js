@@ -11,6 +11,14 @@ import {
   CLEAR_CONTACTS,
 } from "../types";
 
+// case FILTER_CONTACTS:
+//       return {
+//         ...state,
+//         filtered: state.contacts.sort((a, b) => (a.favorite > b.favorite) ? -1 : 1),
+//       };
+// ------------ filters favorites to be first
+
+
 export default (state, action) => {
   switch (action.type) {
     case GET_CONTACTS:
@@ -59,13 +67,14 @@ export default (state, action) => {
         ...state,
         current: null,
       };
+
+
     case FILTER_CONTACTS:
       return {
         ...state,
         filtered: state.contacts.filter((contact) => {
           const regex = new RegExp(`${action.payload}`, "gi");
           return contact.title.match(regex) || contact.content.match(regex);
-          // return contact.name.match(regex) || contact.email.match(regex);
         }),
       };
     case CLEAR_FILTER:

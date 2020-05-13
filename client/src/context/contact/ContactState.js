@@ -102,6 +102,15 @@ const ContactState = props => {
         type: UPDATE_CONTACT,
         payload: res.data
       });
+      // --------------- temporary fix to re render components after update
+      const response = await axios.get('/api/contacts');
+
+      dispatch({
+        type: GET_CONTACTS,
+        payload: response.data
+      });
+      // --------------- temporary fix to re render components after update
+
     } catch (err) {
       dispatch({
         type: CONTACT_ERROR,

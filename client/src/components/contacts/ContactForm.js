@@ -14,6 +14,7 @@ const ContactForm = () => {
         title: "",
         link: "",
         content: "",
+        favorite: false
       });
     }
   }, [contactContext, current]);
@@ -22,13 +23,22 @@ const ContactForm = () => {
     title: "",
     link: "",
     content: "",
+    favorite: false
   });
 
-  const { title, link, content } = contact;
+  const { title, link, content, favorite } = contact;
 
   const onChange = (e) => {
-    setContact({ ...contact, [e.target.name]: e.target.value });
+    if (e.target.type !== "checkbox") {
+      setContact({ ...contact, [e.target.name]: e.target.value });
+
+    } else {
+      setContact({ ...contact, [e.target.name]: e.target.checked })
+
+    }
     // setContact({ ...contact, title });
+    // setTimeout(function () { console.log(contact) }, 1000);
+
   };
   const onSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +54,11 @@ const ContactForm = () => {
   const clearAll = () => {
     clearCurrent();
   };
-
+  // console.log(favorite)
+  // const handleChange = (e) => {
+  //   let checked = e.target.checked
+  //   setContact({ ...contact, favorite: !checked })
+  // }
   return (
     <form onSubmit={onSubmit}>
       <h2 className="text-primary">
@@ -71,6 +85,28 @@ const ContactForm = () => {
         value={content}
         onChange={onChange}
       />
+      <label
+        htmlFor={`id-of-input`}
+        className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}
+      >
+        <input
+          hidden
+          id={`id-of-input`}
+          type="checkbox"
+          name="favorite"
+          onClick={onChange}
+          checked={favorite}
+        />
+        <input
+          hidden
+          type="checkbox"
+          name="favorite"
+          // onClick={onChange}
+          checked={!favorite}
+        />
+      </label>
+
+
       <div>
         <input
           type="submit"
