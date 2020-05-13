@@ -1,0 +1,55 @@
+/* Modal start */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .modal .modal-main {
+    position: fixed;
+    background: white;
+    width: 80%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .display-block {
+    display: block;
+  }
+  
+  .display-none {
+    display: none;
+  }
+  
+  .fixed-activate {
+    position: fixed;
+    right: 10vh;
+    top: 90vh;
+  }
+  
+  .plus-red,
+  .times-red {
+    color: rgb(250, 23, 98);
+    transform: scale(1.6);
+  }
+  
+  .times-red:hover {
+    color: rgb(209, 20, 83);
+    transform: scale(1.8);
+    transition: all 0.2s;
+  }
+  
+  .plus-med {
+    font-size: 2rem !important;
+  }
+  .close-btn {
+    float: right;
+    width: auto;
+  }
+  
+  /* Modal End */
+  

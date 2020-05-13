@@ -33,7 +33,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { link, title, content } = req.body;
+    const { link, title, content, favorite } = req.body;
 
     try {
       const newContact = new Contact({
@@ -41,6 +41,7 @@ router.post(
         title,
         link,
         content,
+        favorite
       });
 
       const contact = await newContact.save();
@@ -57,13 +58,18 @@ router.post(
 // @desc      Update contact
 // @access    Private
 router.put("/:id", auth, async (req, res) => {
-  const { link, title, content } = req.body;
+  const { link, title, content, favorite } = req.body;
 
   // Build contact object
   const contactFields = {};
   if (title) contactFields.title = title;
   if (link) contactFields.link = link;
   if (content) contactFields.content = content;
+  if (favorite) {
+    contactFields.favorite = favorite
+  } else if (!favorite) {
+    contactFields.favorite = false
+  }
 
   try {
     let contact = await Contact.findById(req.params.id);
@@ -74,48 +80,16 @@ router.put("/:id", auth, async (req, res) => {
     if (contact.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "Not authorized" });
     }
-
+    console.log(contactFields)
     contact = await Contact.findByIdAndUpdate(
       req.params.id,
-      { $set: contactFields },
-      { new: true }
+      { $set: contactFields }
+      // { new: true }
     );
 
     res.json(contact);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-// @route     PUT api/contacts/children/:id
-// @desc      Update contact children
-// @access    Private
-router.put("/children/:id", auth, async (req, res) => {
-  const { title, link, content } = req.body;
-  // DONT FORGET TO ADD auth  ------------------------------------------- TODO
-  // Build contact object
-  const contactFields = {};
-  if (title) contactFields.title = title;
-  if (link) contactFields.link = link;
-  if (content) contactFields.content = content;
-  if (type) contactFields.type = type;
-
-  try {
-    let contact = await Contact.findById(req.params.id);
-
-    if (!contact) return res.status(404).json({ msg: "Contact not found" });
-
-    // Make sure user owns contact
-    if (contact.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: "Not authorized" });
-    }
-
-    contact.children.unshift(contactFields);
-
-    res.json(contact);
-  } catch (err) {
-    console.error(er.message);
     res.status(500).send("Server Error");
   }
 });
@@ -144,3 +118,36 @@ router.delete("/:id", auth, async (req, res) => {
 });
 
 module.exports = router;
+
+
+// // @route     PUT api/contacts/children/:id
+// // @desc      Update contact children
+// // @access    Private
+// router.put("/children/:id", auth, async (req, res) => {
+//   const { title, link, content } = req.body;
+//   // DONT FORGET TO ADD auth  ------------------------------------------- TODO
+//   // Build contact object
+//   const contactFields = {};
+//   if (title) contactFields.title = title;
+//   if (link) contactFields.link = link;
+//   if (content) contactFields.content = content;
+//   if (type) contactFields.type = type;
+
+//   try {
+//     let contact = await Contact.findById(req.params.id);
+
+//     if (!contact) return res.status(404).json({ msg: "Contact not found" });
+
+//     // Make sure user owns contact
+//     if (contact.user.toString() !== req.user.id) {
+//       return res.status(401).json({ msg: "Not authorized" });
+//     }
+
+//     contact.children.unshift(contactFields);
+
+//     res.json(contact);
+//   } catch (err) {
+//     console.error(er.message);
+//     res.status(500).send("Server Error");
+//   }
+// });

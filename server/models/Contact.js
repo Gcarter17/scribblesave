@@ -16,6 +16,10 @@ const ContactSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  favorite: {
+    type: Boolean,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

@@ -17,6 +17,7 @@ const Contacts = () => {
   if (contacts !== null && contacts.length === 0 && !loading) {
     return <h4>Please add a Scribble</h4>;
   }
+  { console.log(contacts) }
 
   return (
     <Fragment>
@@ -39,9 +40,10 @@ const Contacts = () => {
                   timeout={500}
                   classNames="item"
                 >
-                  <ContactItem contact={contact} index={index} />
+                  <ContactItem contact={contact} key={contact.title} index={index} />
                 </CSSTransition>
               ))}
+
           </div>
         </TransitionGroup>
       ) : (
