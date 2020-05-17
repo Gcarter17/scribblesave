@@ -58,8 +58,7 @@ router.post(
 // @desc      Update contact
 // @access    Private
 router.put("/:id", auth, async (req, res) => {
-  const { link, title, content, favorite } = req.body;
-
+  const { link, title, content, favorite, date } = req.body;
   // Build contact object
   const contactFields = {};
   if (title) contactFields.title = title;
@@ -70,6 +69,7 @@ router.put("/:id", auth, async (req, res) => {
   } else if (!favorite) {
     contactFields.favorite = false
   }
+  contactFields.date = Date()   // on update, automatically updates date to current date so react filter moves that item to top
 
   try {
     let contact = await Contact.findById(req.params.id);
@@ -80,7 +80,7 @@ router.put("/:id", auth, async (req, res) => {
     if (contact.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "Not authorized" });
     }
-    console.log(contactFields)
+    // console.log(contactFields) logs what the update obj looks l ike
     contact = await Contact.findByIdAndUpdate(
       req.params.id,
       { $set: contactFields }
