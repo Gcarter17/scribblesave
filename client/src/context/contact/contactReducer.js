@@ -20,11 +20,13 @@ import {
 
 
 export default (state, action) => {
+  // console.log(action.payload)
   switch (action.type) {
     case GET_CONTACTS:
       return {
         ...state,
-        contacts: action.payload,
+        contacts: action.payload.sort((a, b) => a.date - b.date), // sorts based on date
+        // contacts:action.payload  doesn't offer any sorting except order in which they're organized in DB
         loading: false,
       };
     case ADD_CONTACT:
@@ -91,3 +93,4 @@ export default (state, action) => {
       return state;
   }
 };
+

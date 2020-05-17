@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
+import MyEditor from "../layout/RichEditor"
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
@@ -30,21 +31,27 @@ const ContactForm = () => {
 
   const onChange = (e) => {
     if (e.target.type !== "checkbox") {
-      setContact({ ...contact, [e.target.name]: e.target.value });
+      setContact({ ...contact, [e.target.name]: e.target.value }); // takes the contact object (value as is) and adds target value to target name
 
-    } else {
+    } else if (e.target.type) {
       setContact({ ...contact, [e.target.name]: e.target.checked })
 
+    } else {
+      console.log(e)
+
     }
-    // setContact({ ...contact, title });
-    // setTimeout(function () { console.log(contact) }, 1000);
 
   };
+
+  const onContentChange = (e) => {
+    setContact({ ...contact, content: e })
+    // setContact({ ...contact, content: e.toString("markdown") })
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
       addContact(contact);
-      console.log(contact);
     } else {
       updateContact(contact);
     }
@@ -54,11 +61,9 @@ const ContactForm = () => {
   const clearAll = () => {
     clearCurrent();
   };
-  // console.log(favorite)
-  // const handleChange = (e) => {
-  //   let checked = e.target.checked
-  //   setContact({ ...contact, favorite: !checked })
-  // }
+
+  // let val = document.querySelectorAll('[data-text]');
+
   return (
     <form onSubmit={onSubmit}>
       <h2 className="text-primary">
@@ -78,13 +83,15 @@ const ContactForm = () => {
         value={link}
         onChange={onChange}
       />
-      <textarea
+      {/* <textarea
         type="text"
         placeholder="Content"
         name="content"
         value={content}
         onChange={onChange}
-      />
+      /> */}
+      <MyEditor styles={"rte-form"} onChange={onContentChange} content={content} />
+
       <label
         htmlFor={`id-of-input`}
         className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}
