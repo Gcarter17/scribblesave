@@ -7,6 +7,12 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
   }
+
+  .ReactModalPortal {
+    position: absolute;
+    z-index: 10;
+
+  }
   .modal .modal-main {
     position: fixed;
     background: white;
@@ -30,6 +36,7 @@
     right: 10vh;
     top: 90vh;
   }
+
   
   .plus-red,
   .times-red {

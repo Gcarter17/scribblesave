@@ -17,7 +17,6 @@ const Contacts = () => {
   if (contacts !== null && contacts.length === 0 && !loading) {
     return <h4>Please add a Scribble</h4>;
   }
-  { console.log(contacts) }
 
   return (
     <Fragment>
