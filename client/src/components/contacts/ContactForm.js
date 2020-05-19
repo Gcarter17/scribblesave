@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
+import MyEditor from "../layout/RichEditor"
+import ExperienceForm from "./ExperienceForm"
+import RichTextEditor from 'react-rte';
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
@@ -14,6 +17,7 @@ const ContactForm = () => {
         title: "",
         link: "",
         content: "",
+        favorite: false
       });
     }
   }, [contactContext, current]);
@@ -22,19 +26,34 @@ const ContactForm = () => {
     title: "",
     link: "",
     content: "",
+    favorite: false
   });
 
-  const { title, link, content } = contact;
+  const { title, link, content, favorite } = contact;
 
   const onChange = (e) => {
-    setContact({ ...contact, [e.target.name]: e.target.value });
-    // setContact({ ...contact, title });
+    if (e.target.type !== "checkbox") {
+      setContact({ ...contact, [e.target.name]: e.target.value }); // takes the contact object (value as is) and adds target value to target name
+
+    } else if (e.target.type) {
+      setContact({ ...contact, [e.target.name]: e.target.checked })
+
+    } else {
+      console.log(e)
+
+    }
+
   };
+
+  const onContentChange = (e) => {
+    setContact({ ...contact, content: e })
+    // setContact({ ...contact, content: e.toString("markdown") })
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
       addContact(contact);
-      console.log(contact);
     } else {
       updateContact(contact);
     }
@@ -45,47 +64,85 @@ const ContactForm = () => {
     clearCurrent();
   };
 
+  // let val = document.querySelectorAll('[data-text]');
+  // console.log(RichTextEditor.createValueFromString({ content }, "html"))
   return (
-    <form onSubmit={onSubmit}>
-      <h2 className="text-primary">
-        {current ? "Edit Scribble" : "Add Scribble"}
-      </h2>
-      <input
-        type="text"
-        placeholder="Title"
-        name="title"
-        value={title}
-        onChange={onChange}
-      />
-      <input
-        type="text"
-        placeholder="Link"
-        name="link"
-        value={link}
-        onChange={onChange}
-      />
-      <textarea
-        type="text"
-        placeholder="Content"
-        name="content"
-        value={content}
-        onChange={onChange}
-      />
-      <div>
+    <>
+      <form onSubmit={onSubmit}>
+        <h2 className="text-primary">
+          {current ? "Edit Scribble" : "Add Scribble"}
+        </h2>
         <input
-          type="submit"
-          value={current ? "Update Scribble" : "Add Scribble"}
-          className="btn btn-primary btn-block"
+          type="text"
+          placeholder="Title"
+          name="title"
+          value={title}
+          onChange={onChange}
         />
-      </div>
-      {current && (
+        <input
+          type="text"
+          placeholder="Link"
+          name="link"
+          value={link}
+          onChange={onChange}
+        />
+
+        {/* <textarea
+          type="text"
+          placeholder="Content"
+          name="content"
+          value={content}
+          onChange={onChange}
+        />
+        <MyEditor styles={"rte-form"} onChange={onContentChange} content={content} /> */}
+        {/* <MyEditor styles={"rte-form"} onChange={onContentChange} content={content} /> */}
+        {current ? <textarea
+          type="text"
+          placeholder="Content"
+          name="content"
+          value={content}
+          onChange={onChange}
+        /> : <MyEditor styles={"rte-form"} onChange={onContentChange} content={content} />}
+
+        <label
+          htmlFor={`id-of-input`}
+          className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}
+        >
+          <input
+            hidden
+            id={`id-of-input`}
+            type="checkbox"
+            name="favorite"
+            onClick={onChange}
+            checked={favorite}
+          />
+          <input
+            hidden
+            type="checkbox"
+            name="favorite"
+            // onClick={onChange}
+            checked={!favorite}
+          />
+        </label>
+
+
         <div>
-          <button className="btn btn-light btn-block" onClick={clearAll}>
-            Clear
-          </button>
+          <input
+            type="submit"
+            value={current ? "Update Scribble" : "Add Scribble"}
+            className="btn btn-primary btn-block"
+          />
         </div>
-      )}
-    </form>
+        {current && (
+          <div>
+            <button className="btn btn-light btn-block" onClick={clearAll}>
+              Clear
+          </button>
+          </div>
+        )}
+      </form>
+      <ExperienceForm />
+    </>
   );
 };
 

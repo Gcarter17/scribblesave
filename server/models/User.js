@@ -26,7 +26,9 @@ const UserSchema = mongoose.Schema({
   // },
   token: {    // ------------------- added for google
     type: String,
-    unique: true
+    unique: function () {
+      this.token === "" ? false : true
+    }
   },
   password: {
     type: String,

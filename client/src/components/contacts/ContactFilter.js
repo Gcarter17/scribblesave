@@ -1,5 +1,7 @@
 import React, { useContext, useRef, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
+import DragNDrop from "../layout/DragNDrop"
+import Card from "../layout/Card"
 
 const ContactFilter = () => {
   const contactContext = useContext(ContactContext);
@@ -29,6 +31,14 @@ const ContactFilter = () => {
         placeholder="Search..."
         onChange={onChange}
       />
+      {/* <div className="flexbox">
+
+        <DragNDrop id={`board`} className='board'>
+
+        </DragNDrop>
+
+
+      </div> */}
     </>
   );
 };
