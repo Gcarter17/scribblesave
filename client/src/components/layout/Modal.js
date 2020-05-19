@@ -9,10 +9,12 @@ const customStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
+    overflow: "scroll",
+    maxHeight: "100vh",
     // marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     width: "calc(100% - 80px)",
-    maxWidth: "700px"
+    maxWidth: "700px",
   },
 };
 
