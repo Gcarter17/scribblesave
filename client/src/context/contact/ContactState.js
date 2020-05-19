@@ -91,7 +91,7 @@ const ContactState = props => {
     };
 
     try {
-      console.log(contact._id, 'this is the contact id')
+      console.log(contact, 'this is the contact')
       const res = await axios.put(
         `/api/contacts/${contact._id}`,
         contact,
@@ -119,32 +119,70 @@ const ContactState = props => {
     }
   };
 
-  // Update Contact Children
-  const updateContactChildren = async contact => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
+  // // Update Experience
+  // const updateExperience = async formData => {
+  //   const config = {
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   };
+  //   console.log(formData._id, 'this is the contact id')
 
-    try {
-      const res = await axios.put(
-        `/api/contacts/children${contact._id}`,
-        contact,
-        config
-      );
+  //   try {
+  //     const res = await axios.put(
+  //       `/api/contacts/experience/${formData._id}`,
+  //       formData,
+  //       config
+  //     );
 
-      dispatch({
-        type: UPDATE_CONTACT,
-        payload: res.data
-      });
-    } catch (err) {
-      dispatch({
-        type: CONTACT_ERROR,
-        payload: err.response.msg
-      });
-    }
-  };
+  //     dispatch({
+  //       type: UPDATE_CONTACT,
+  //       payload: res.data
+  //     });
+  //     // --------------- temporary fix to re render components after update
+  //     const response = await axios.get('/api/contacts');
+
+  //     dispatch({
+  //       type: GET_CONTACTS,
+  //       payload: response.data
+  //     });
+  //     // --------------- temporary fix to re render components after update
+
+  //   } catch (err) {
+  //     dispatch({
+  //       type: CONTACT_ERROR,
+  //       payload: err.response.msg
+  //     });
+  //   }
+  // };
+
+
+  // // Update Contact Children
+  // const updateContactChildren = async contact => {
+  //   const config = {
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   };
+
+  //   try {
+  //     const res = await axios.put(
+  //       `/api/contacts/children${contact._id}`,
+  //       contact,
+  //       config
+  //     );
+
+  //     dispatch({
+  //       type: UPDATE_CONTACT,
+  //       payload: res.data
+  //     });
+  //   } catch (err) {
+  //     dispatch({
+  //       type: CONTACT_ERROR,
+  //       payload: err.response.msg
+  //     });
+  //   }
+  // };
 
 
 
@@ -185,11 +223,10 @@ const ContactState = props => {
         setCurrent,
         clearCurrent,
         updateContact,
-        updateContactChildren,
         filterContacts,
         clearFilter,
         getContacts,
-        clearContacts
+        clearContacts,
       }}
     >
       {props.children}

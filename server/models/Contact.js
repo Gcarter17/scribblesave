@@ -20,6 +20,13 @@ const ContactSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  experience: [
+    {
+      description: {
+        type: String
+      }
+    }
+  ],
   date: {
     type: Date,
     default: Date.now,
