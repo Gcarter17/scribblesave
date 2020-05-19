@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
-import MyEditor from "../layout/RichEditor"
-import ExperienceForm from "./ExperienceForm"
-import RichTextEditor from 'react-rte';
+import MyEditor from "../layout/RichEditor";
+import ExperienceForm from "./ExperienceForm";
+import RichTextEditor from "react-rte";
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
@@ -17,7 +17,7 @@ const ContactForm = () => {
         title: "",
         link: "",
         content: "",
-        favorite: false
+        favorite: false,
       });
     }
   }, [contactContext, current]);
@@ -26,7 +26,7 @@ const ContactForm = () => {
     title: "",
     link: "",
     content: "",
-    favorite: false
+    favorite: false,
   });
 
   const { title, link, content, favorite } = contact;
@@ -34,21 +34,17 @@ const ContactForm = () => {
   const onChange = (e) => {
     if (e.target.type !== "checkbox") {
       setContact({ ...contact, [e.target.name]: e.target.value }); // takes the contact object (value as is) and adds target value to target name
-
     } else if (e.target.type) {
-      setContact({ ...contact, [e.target.name]: e.target.checked })
-
+      setContact({ ...contact, [e.target.name]: e.target.checked });
     } else {
-      console.log(e)
-
+      console.log(e);
     }
-
   };
 
   const onContentChange = (e) => {
-    setContact({ ...contact, content: e })
+    setContact({ ...contact, content: e });
     // setContact({ ...contact, content: e.toString("markdown") })
-  }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -59,7 +55,7 @@ const ContactForm = () => {
     }
     clearAll();
   };
-
+  // addContact()
   const clearAll = () => {
     clearCurrent();
   };
@@ -96,17 +92,27 @@ const ContactForm = () => {
         />
         <MyEditor styles={"rte-form"} onChange={onContentChange} content={content} /> */}
         {/* <MyEditor styles={"rte-form"} onChange={onContentChange} content={content} /> */}
-        {current ? <textarea
-          type="text"
-          placeholder="Content"
-          name="content"
-          value={content}
-          onChange={onChange}
-        /> : <MyEditor styles={"rte-form"} onChange={onContentChange} content={content} />}
+        {current ? (
+          <textarea
+            type="text"
+            placeholder="Content"
+            name="content"
+            value={content}
+            onChange={onChange}
+          />
+        ) : (
+          <MyEditor
+            styles={"rte-form"}
+            onChange={onContentChange}
+            content={content}
+          />
+        )}
 
         <label
           htmlFor={`id-of-input`}
-          className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}
+          className={`${
+            favorite ? "fas gold" : "far grey"
+          } fa-star custom-checkbox`}
         >
           <input
             hidden
@@ -125,7 +131,6 @@ const ContactForm = () => {
           />
         </label>
 
-
         <div>
           <input
             type="submit"
@@ -137,7 +142,7 @@ const ContactForm = () => {
           <div>
             <button className="btn btn-light btn-block" onClick={clearAll}>
               Clear
-          </button>
+            </button>
           </div>
         )}
       </form>
