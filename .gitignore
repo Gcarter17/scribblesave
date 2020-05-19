@@ -1,5 +1,6 @@
 node_modules/
-/config
+# /config
+# hide config for github, but show for heroku
 
 /client/build
 

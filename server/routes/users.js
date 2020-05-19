@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator/check');
+const uuidv4 = require('uuid').v4
 
 const User = require('../models/User');
 
@@ -42,7 +43,7 @@ router.post(
         name: name,
         email: email ? email : "",
         googleEmail: googleEmail ? googleEmail : "",
-        token: token ? token : "",
+        token: token ? token : uuidv4(),
         password: password ? password : ""
       });
 

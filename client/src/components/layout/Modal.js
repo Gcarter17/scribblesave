@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useContext } from "react";
 import Modal from "react-modal";
 import ContactForm from "../contacts/ContactForm";
 import ContactContext from "../../context/contact/contactContext";
@@ -10,8 +9,10 @@ const customStyles = {
     left: "50%",
     right: "auto",
     bottom: "auto",
-    marginRight: "-50%",
+    // marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    width: "calc(100% - 80px)",
+    maxWidth: "700px"
   },
 };
 
@@ -41,14 +42,14 @@ const Mode = () => {
     setIsOpen(false);
   };
   return (
-    <div>
+    <>
       <span
         // onClick={() => appContext.setModal(!appContext.openModal)}
         onClick={modalOpen}
         className="fa-stack fixed-activate"
       >
         <i className=" fa fa-circle plus-red  fa-stack-2x"></i>
-        <i className=" fa fa-plus fa-stack-1x font-med fa-inverse"></i>
+        <i className=" fa fa-plus fa-stack-1x plus-med fa-inverse"></i>
       </span>
       <Modal
         isOpen={modalIsOpen}
@@ -65,7 +66,7 @@ const Mode = () => {
           <ContactForm />
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

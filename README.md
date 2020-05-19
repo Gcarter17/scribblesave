@@ -1,16 +1,16 @@
-# Contact Keeper
+# Scribble Save
 
-> Full stack MERN contact manager with React hooks, context & JWT authentication. Part of my React course on Udemy.
+> Full stack MERN (Mongodb, express.js, react, node) note/bookmark manager with React hooks, context & JWT authentication. 
 
-This is the full app. The API can be found [here](https://github.com/bradtraversy/contact_keeper_api) with documented endpoints
+Built on top of Brad Travery's project [here](https://github.com/bradtraversy/contact_keeper_api)
 
 ## Usage
 
 Install dependencies
 
 ```bash
-npm install
-npm client-install
+npm run install
+npm run client-install
 ```
 
 ### Mongo connection setup
