@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useContext } from "react";
 import Modal from "react-modal";
 import ContactForm from "../contacts/ContactForm";
 import ContactContext from "../../context/contact/contactContext";

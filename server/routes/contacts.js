@@ -58,7 +58,7 @@ router.post(
 // @desc      Update contact
 // @access    Private
 router.put("/:id", auth, async (req, res) => {
-  const { link, title, content, favorite, date } = req.body;
+  const { link, title, content, favorite, experience } = req.body;
   // Build contact object
   const contactFields = {};
   if (title) contactFields.title = title;
@@ -70,28 +70,52 @@ router.put("/:id", auth, async (req, res) => {
     contactFields.favorite = false
   }
   contactFields.date = Date()   // on update, automatically updates date to current date so react filter moves that item to top
+  // console.log(req.params.id, 'id from contact')
 
-  try {
-    let contact = await Contact.findById(req.params.id);
+  // console.log(Object.keys(contactFields).length === 0 && contactFields.constructor === Object)
 
-    if (!contact) return res.status(404).json({ msg: "Contact not found" });
+  if (Object.keys(contactFields).length > 2) {
+    try {
+      let contact = await Contact.findById(req.params.id);
 
-    // Make sure user owns contact
-    if (contact.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: "Not authorized" });
+      if (!contact) return res.status(404).json({ msg: "Contact not found" });
+
+      // Make sure user owns contact
+      if (contact.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: "Not authorized" });
+      }
+      // console.log(contactFields) logs what the update obj looks l ike
+      contact = await Contact.findByIdAndUpdate(
+        req.params.id,
+        { $set: contactFields }
+        // { new: true }
+      );
+
+      res.json(contact);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
     }
-    // console.log(contactFields) logs what the update obj looks l ike
-    contact = await Contact.findByIdAndUpdate(
-      req.params.id,
-      { $set: contactFields }
-      // { new: true }
-    );
+  } else {
+    try {
+      // let body = req.body.description // assigning just the desc and not id to a variable
+      let contact = await Contact.findById(req.body._id);
+      if (!contact) return res.status(404).json({ msg: "Contact not found" });
+      if (contact.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: "Not authorized" });
+      }
 
-    res.json(contact);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+      contact.experience.unshift(req.body)
+      await contact.save()
+
+      res.json(contact)
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+
   }
+
 });
 
 // @route     DELETE api/contacts/:id

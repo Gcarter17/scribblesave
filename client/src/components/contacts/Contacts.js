@@ -3,6 +3,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ContactItem from "./ContactItem";
 import Spinner from "../layout/Spinner";
 import ContactContext from "../../context/contact/contactContext";
+import DragNDrop from "../layout/DragNDrop"
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
@@ -22,6 +23,7 @@ const Contacts = () => {
     <Fragment>
       {contacts !== null && !loading ? (
         <TransitionGroup>
+          {/* <DragNDrop id='board-20' className='board'> */}
           <div className="grid-3">
             {filtered !== null
               ? filtered.map((contact, index) => (
@@ -44,10 +46,12 @@ const Contacts = () => {
               ))}
 
           </div>
+          {/* </DragNDrop> */}
         </TransitionGroup>
       ) : (
           <Spinner />
         )}
+
     </Fragment>
   );
 };

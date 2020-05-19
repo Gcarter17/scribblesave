@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import ContactContext from "../../context/contact/contactContext";
 import moment from 'moment';
 import MyEditor from "../layout/RichEditor"
+
 
 const ContactItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
@@ -18,6 +19,7 @@ const ContactItem = ({ contact, index }) => {
   };
 
   const setTheCurrent = () => {
+    clearCurrent()
     setCurrent(contact)
   }
 
@@ -26,16 +28,18 @@ const ContactItem = ({ contact, index }) => {
     if (!isDropped) {
       setTimeout(function () { setIsDropped(false) }, 5000);
     }
-    console.log(isDropped)
   }
   const [isDropped, setIsDropped] = useState(false);
-
 
   // inbetween / and / is the symbol to be replaced, and " " is what to replace it with
   // let newContent = content.replace(/{/g, "<h1>");
   // let newestContent = newContent.replace(/}/g, "</h1>");
 
   return (
+
+    // <Card id={`card-${index}`} className="card" draggable='true'>
+
+
     <div className="card bg-light">
       <div className="card-header">
         {link ? (
@@ -49,22 +53,10 @@ const ContactItem = ({ contact, index }) => {
       </div>
 
       {/* <p className="card-content text-dark text-left">{content}</p> */}
-      <MyEditor styles={"rte-item"} content={content} id={_id} updateContact={updateContact} readOnly={true} />
+      <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} />
 
       <p className="card-btm">
-        {/* <button
-          name="editButton"
-          className="btn btn-dark btn-sm"
-          // onClick={() => setCurrent(contact)}
-          onClick={setTheCurrent}
-        >
-          Edit
-        </button> */}
-        {/* <button className="btn btn-danger btn-sm" onClick={onDelete}>
-          Delete
-        </button> */}
         <span
-          // onClick={toforceUpdate}
           className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}
         />
         <span className="theDate">{moment(theDate).calendar()}</span>
@@ -72,6 +64,7 @@ const ContactItem = ({ contact, index }) => {
           {/* <button onMouseEnter={() => dropDown(true)} onMouseLeave={() => dropDown(false)} className="dropbtn">Dropdown</button> */}
           <button onClick={dropDown} className="dropbtn">...</button>
           <div className={isDropped ? "dropdown-content show" : "dropdown-content"}>
+            {/* <div className={"dropdown-content show"}> */}
             <button
               name="editButton"
               className="btn btn-dark btn-sm"
@@ -86,15 +79,9 @@ const ContactItem = ({ contact, index }) => {
             {/* any singular item placed here will be made into a dropdown component */}
           </div>
         </div>
-        {/* <label
-          htmlFor={`id-of-input-${index}`}
-          onClick={favorite ? makeFalse : makeTrue}
-          className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}
-        >
-          <input type="checkbox" id={`id-of-input-${index}`} />
-        </label> */}
       </p>
     </div>
+    // </Card>
   );
 };
 
@@ -103,3 +90,21 @@ ContactItem.propTypes = {
 };
 
 export default ContactItem;
+
+
+{/* <DragNDrop id={`board-${index}`} className='board'>
+<Card id={`card-${index}`} className="card" draggable='true'> */}
+
+
+// {/* <div className="flexbox">
+//   <DragNDrop id='board-1' className='board'>
+{/* <Card id="card-1" className="card" draggable='true'>
+  <p>card one</p>
+</Card> */}
+//   </DragNDrop>
+//   <DragNDrop id='board-2' className='board'>
+//     <Card id="card-2" className="card" draggable='true'>
+//       <p>card two</p>
+//     </Card>
+//   </DragNDrop>
+// </div> */}

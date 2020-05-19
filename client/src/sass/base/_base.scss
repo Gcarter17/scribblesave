@@ -49,8 +49,9 @@ img {
   // max-width: 1264px;
   max-width: 1500px;
   margin: auto;
+  margin-bottom: 300px;
   overflow: hidden;
-  padding: 0 2rem;
+  padding: 2rem 2rem 4rem 2rem;
 }
 
 /* Text Styles*/
@@ -197,7 +198,8 @@ img {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 6rem;
+  min-height: 4rem;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -216,11 +218,9 @@ img {
   // display: block !important;
   display: flex;
   flex-direction: column;
-  width: auto;
   background-color: transparent;
   * {
     margin: 0 !important;
-
     flex-grow: 1;
   }
 }
@@ -288,6 +288,12 @@ img {
 }
 
 /* Grid */
+.grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -423,7 +429,36 @@ img {
 }
 
 
+// dragable style start
 
+.flexbox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 768px;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.flexbox .board {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  background-color: grey;
+  padding: 15px;
+}
+
+.flexbox .board .card {
+  padding: 15px 25px;
+  background-color: white;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+// dragable style end
 
 
 
