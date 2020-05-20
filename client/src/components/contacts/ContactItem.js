@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import ContactContext from "../../context/contact/contactContext";
 import moment from 'moment';
 import MyEditor from "../layout/RichEditor"
+import CodeEditor from "../layout/CodeEditor"
 
 
 const ContactItem = ({ contact, index }) => {
@@ -53,7 +54,8 @@ const ContactItem = ({ contact, index }) => {
       </div>
 
       {/* <p className="card-content text-dark text-left">{content}</p> */}
-      <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} />
+      <CodeEditor content={content} />
+      {/* <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} /> */}
 
       <p className="card-btm">
         <span
@@ -80,7 +82,7 @@ const ContactItem = ({ contact, index }) => {
           </div>
         </div>
       </p>
-    </div>
+    </div >
     // </Card>
   );
 };
