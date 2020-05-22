@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
-import MyEditor from "../layout/RichEditor"
-import ExperienceForm from "./ExperienceForm"
+import MyEditor from "./RichEditor"
+import ExperienceForm from "../contacts/ExperienceForm"
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
+import RichTextEditor, { EditorValue } from 'react-rte'
+import OnOffBtn from "../forms/OnOffBtn"
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
@@ -14,6 +16,9 @@ const ContactForm = () => {
   useEffect(() => {
     if (current !== null) {
       setContact(current);
+      // setEditorValue(current.content)
+      setEditorValue(RichTextEditor.createValueFromString(content, 'markdown'))
+
     } else {
       setContact({
         title: "",
@@ -33,7 +38,7 @@ const ContactForm = () => {
 
   const { title, link, content, favorite } = contact;
 
-  const onChange = (e) => {
+  const onChange = (e) => { // normal input onChange
     if (e.target.type !== "checkbox") {
       setContact({ ...contact, [e.target.name]: e.target.value }); // takes the contact object (value as is) and adds target value to target name
 
@@ -47,18 +52,20 @@ const ContactForm = () => {
 
   };
 
-  const onContentChange = (e) => {
-    setContact({ ...contact, content: e })
-    console.log(contact, 'contact mon')
-    // setContact({ ...contact, content: e.toString("markdown") })
-  }
-
-  const onValueChange = (e) => {
+  const onValueChange = (e) => {  // code editor onChange
     console.log(e)
     // code => this.setState({ code })
     setContact({ ...contact, content: e }); // takes the contact object (value as is) and adds target value to target name
 
   }
+
+  const [editorValue, setEditorValue] = useState(RichTextEditor.createValueFromString(content, 'html'));
+
+  const handleChange = value => { // react rte onChange
+    setEditorValue(value);
+    setContact({ ...contact, content: value.toString('markdown') })
+
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -563,6 +570,11 @@ const ContactForm = () => {
   //   })
   // }
 
+  const check = (e) => {
+    // console.log(e.target.checked)
+    console.log(e)
+  }
+
   return (
     <>
       {/* <span onClick={pushIt}>hello</span> */}
@@ -570,7 +582,6 @@ const ContactForm = () => {
         <h2 className="text-primary">
           {current ? "Edit Scribble" : "Add Scribble"}
         </h2>
-
         <input
           type="text"
           placeholder="Title"
@@ -585,7 +596,15 @@ const ContactForm = () => {
           value={link}
           onChange={onChange}
         />
-
+        <OnOffBtn isChecked={check} />
+        <RichTextEditor
+          value={editorValue}
+          onChange={handleChange}
+          required
+          type="string"
+          variant="filled"
+          style={{ minHeight: 410 }}
+        />
         {/* <textarea
           type="text"
           placeholder="Content"
@@ -593,8 +612,7 @@ const ContactForm = () => {
           value={content}
           onChange={onChange}
         /> */}
-        {/* <MyEditor value={content} setValue={onContentChange} /> */}
-        <Editor
+        {/* <Editor
           value={content}
           onValueChange={onValueChange}
           highlight={code => highlight(code, languages.js)}
@@ -604,7 +622,7 @@ const ContactForm = () => {
             fontSize: 16,
             border: '1px solid #ccc'
           }}
-        />
+        /> */}
 
         <label
           htmlFor={`id-of-input`}
