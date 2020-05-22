@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import ContactContext from "../../context/contact/contactContext";
 import moment from 'moment';
-import MyEditor from "../layout/RichEditor"
-import CodeEditor from "../layout/CodeEditor"
+import MyEditor from "../forms/RichEditor"
+import CodeEditor from "../forms/CodeEditor"
 
 
 const ContactItem = ({ contact, index }) => {
@@ -54,8 +54,9 @@ const ContactItem = ({ contact, index }) => {
       </div>
 
       {/* <p className="card-content text-dark text-left">{content}</p> */}
-      <CodeEditor content={content} />
-      {/* <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} /> */}
+      {/* <CodeEditor content={content} /> */}
+      <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} />
+      {/* <MyEditor /> */}
 
       <p className="card-btm">
         <span
