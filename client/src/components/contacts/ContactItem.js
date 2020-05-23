@@ -12,29 +12,30 @@ const ContactItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
   const { deleteContact, setCurrent, clearCurrent, updateContact } = contactContext;
 
-  useEffect(() => {
-    setContactState({
-      _id: contact._id,
-      title: contact.title,
-      link: contact.link,
-      content: contact.content,
-      checked: contact.checked,
-      favorite: contact.favorite,
-      date: contact.date
-    })
-  })
+  // useEffect(() => {
+  //   setContactState({
+  //     _id: contact._id,
+  //     title: contact.title,
+  //     link: contact.link,
+  //     content: contact.content,
+  //     checked: contact.checked,
+  //     favorite: contact.favorite,
+  //     date: contact.date
+  //   })
+  // })
 
-  const [contactState, setContactState] = useState({
-    _id: '',
-    title: '',
-    link: '',
-    content: '',
-    checked: '',
-    favorite: '',
-    date: ''
-  })
+  // const [contactState, setContactState] = useState({
+  //   _id: '',
+  //   title: '',
+  //   link: '',
+  //   content: '',
+  //   checked: '',
+  //   favorite: '',
+  //   date: ''
+  // })
 
-  const { _id, title, link, content, checked, favorite, date } = contactState;
+  // const { _id, title, link, content, checked, favorite, date } = contactState;
+  const { _id, title, link, content, checked, favorite, date } = contact;
 
 
   const theDate = date
