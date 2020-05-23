@@ -13,7 +13,9 @@ const customStyles = {
     maxHeight: '100vh',
     // marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    width: "calc(100% - 80px)",
+    width: "calc(100% - 40px)",
+    // width: "calc(100% - 80px)",
+    // width: '100vw',
     maxWidth: "700px",
   },
 };
