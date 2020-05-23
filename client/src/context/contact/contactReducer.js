@@ -21,6 +21,7 @@ import {
 
 export default (state, action) => {
   // console.log(action.payload)
+  // console.log(action.type, 'action type', action.payload, 'action payload')
   switch (action.type) {
     case GET_CONTACTS:
       return {
@@ -36,6 +37,7 @@ export default (state, action) => {
         loading: false,
       };
     case UPDATE_CONTACT:
+
       return {
         ...state,
         contacts: state.contacts.map((contact) =>

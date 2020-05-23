@@ -1,18 +1,45 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ContactContext from "../../context/contact/contactContext";
 import moment from 'moment';
 import MyEditor from "../forms/RichEditor"
-import CodeEditor from "../forms/CodeEditor"
-
+import Editor from 'react-simple-code-editor';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
 
 const ContactItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
   const { deleteContact, setCurrent, clearCurrent, updateContact } = contactContext;
 
-  const { _id, title, link, content, favorite, date } = contact;
+  useEffect(() => {
+    setContactState({
+      _id: contact._id,
+      title: contact.title,
+      link: contact.link,
+      content: contact.content,
+      checked: contact.checked,
+      favorite: contact.favorite,
+      date: contact.date
+    })
+  })
+
+  const [contactState, setContactState] = useState({
+    _id: '',
+    title: '',
+    link: '',
+    content: '',
+    checked: '',
+    favorite: '',
+    date: ''
+  })
+
+  const { _id, title, link, content, checked, favorite, date } = contactState;
+
 
   const theDate = date
+
+
 
   const onDelete = () => {
     deleteContact(_id);
@@ -20,7 +47,6 @@ const ContactItem = ({ contact, index }) => {
   };
 
   const setTheCurrent = () => {
-    clearCurrent()
     setCurrent(contact)
   }
 
@@ -55,7 +81,21 @@ const ContactItem = ({ contact, index }) => {
 
       {/* <p className="card-content text-dark text-left">{content}</p> */}
       {/* <CodeEditor content={content} /> */}
-      <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} />
+      {/* {checked.toString()} */}
+      {checked ? <Editor
+        value={content}
+        // onValueChange={code => this.setState({ code })}
+        highlight={code => highlight(code, languages.js)}
+        padding={10}
+        style={{
+          fontFamily: '"Fira code", "Fira Mono", monospace',
+          fontSize: 16,
+        }}
+      /> :
+        <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} />
+
+      }
+
       {/* <MyEditor /> */}
 
       <p className="card-btm">

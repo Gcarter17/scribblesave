@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
 import MyEditor from "./RichEditor"
-import ExperienceForm from "../contacts/ExperienceForm"
+import ExperienceForm from "./ExperienceForm"
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
@@ -17,13 +17,15 @@ const ContactForm = () => {
     if (current !== null) {
       setContact(current);
       // setEditorValue(current.content)
-      setEditorValue(RichTextEditor.createValueFromString(content, 'markdown'))
+      setEditorValue(RichTextEditor.createValueFromString(current.content, 'markdown'))
+      // setEditorValue(RichTextEditor.createValueFromString(content, 'markdown'))
 
     } else {
       setContact({
         title: "",
         link: "",
         content: "",
+        checked: false,
         favorite: false
       });
     }
@@ -33,10 +35,11 @@ const ContactForm = () => {
     title: "",
     link: "",
     content: "",
+    checked: false,
     favorite: false,
   });
 
-  const { title, link, content, favorite } = contact;
+  const { title, link, content, checked, favorite } = contact;
 
   const onChange = (e) => { // normal input onChange
     if (e.target.type !== "checkbox") {
@@ -53,9 +56,7 @@ const ContactForm = () => {
   };
 
   const onValueChange = (e) => {  // code editor onChange
-    console.log(e)
-    // code => this.setState({ code })
-    setContact({ ...contact, content: e }); // takes the contact object (value as is) and adds target value to target name
+    setContact({ ...contact, content: e });
 
   }
 
@@ -66,6 +67,11 @@ const ContactForm = () => {
     setContact({ ...contact, content: value.toString('markdown') })
 
   };
+
+  const checkedChange = (e) => {
+    setContact({ ...contact, checked: e.target.checked })
+    console.log(!checked)
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -79,6 +85,7 @@ const ContactForm = () => {
 
   const clearAll = () => {
     clearCurrent();
+    setEditorValue(RichTextEditor.createEmptyValue())
   };
 
   // const [loaded, setLoaded] = useState(false);
@@ -570,10 +577,6 @@ const ContactForm = () => {
   //   })
   // }
 
-  const check = (e) => {
-    // console.log(e.target.checked)
-    console.log(e)
-  }
 
   return (
     <>
@@ -582,6 +585,7 @@ const ContactForm = () => {
         <h2 className="text-primary">
           {current ? "Edit Scribble" : "Add Scribble"}
         </h2>
+        {checked.toString()}
         <input
           type="text"
           placeholder="Title"
@@ -596,15 +600,12 @@ const ContactForm = () => {
           value={link}
           onChange={onChange}
         />
-        <OnOffBtn isChecked={check} />
-        <RichTextEditor
-          value={editorValue}
-          onChange={handleChange}
-          required
-          type="string"
-          variant="filled"
-          style={{ minHeight: 410 }}
-        />
+        {/* <OnOffBtn isChecked={check} /> */}
+        <div class="button b2" id="button-16">
+          <input checked={checked} onChange={checkedChange} type="checkbox" class="checkbox" />
+          <div class="knobs"></div>
+          <div class="layer"></div>
+        </div>
         {/* <textarea
           type="text"
           placeholder="Content"
@@ -612,7 +613,16 @@ const ContactForm = () => {
           value={content}
           onChange={onChange}
         /> */}
-        {/* <Editor
+        <RichTextEditor
+          value={editorValue}
+          onChange={handleChange}
+          required
+          type="string"
+          variant="filled"
+          // style={{ minHeight: 410 }}
+          className={checked && 'contact-rte'}
+        />
+        <Editor
           value={content}
           onValueChange={onValueChange}
           highlight={code => highlight(code, languages.js)}
@@ -622,8 +632,8 @@ const ContactForm = () => {
             fontSize: 16,
             border: '1px solid #ccc'
           }}
-        /> */}
-
+          className={!checked && 'contact-rte'}
+        />
         <label
           htmlFor={`id-of-input`}
           className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}

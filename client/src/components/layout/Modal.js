@@ -23,7 +23,7 @@ Modal.setAppElement("#root");
 
 const Mode = () => {
   const contactContext = useContext(ContactContext);
-  const { current } = contactContext;
+  const { current, clearCurrent } = contactContext;
   // end of hooks INIT
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -42,6 +42,7 @@ const Mode = () => {
 
   const closeModal = () => {
     setIsOpen(false);
+    clearCurrent()
   };
   return (
     <>
