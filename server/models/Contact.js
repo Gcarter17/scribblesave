@@ -20,6 +20,10 @@ const ContactSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  checked: {
+    type: Boolean,
+    default: false
+  },
   experience: [
     {
       description: {

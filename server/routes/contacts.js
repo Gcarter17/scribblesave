@@ -33,7 +33,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { link, title, content, favorite } = req.body;
+    const { link, title, content, checked, favorite } = req.body;
 
     try {
       const newContact = new Contact({
@@ -41,6 +41,7 @@ router.post(
         title,
         link,
         content,
+        checked,
         favorite
       });
 
@@ -58,7 +59,7 @@ router.post(
 // @desc      Update contact
 // @access    Private
 router.put("/:id", auth, async (req, res) => {
-  const { link, title, content, favorite, experience } = req.body;
+  const { link, title, content, checked, favorite, experience } = req.body;
   // Build contact object
   const contactFields = {};
   if (title) contactFields.title = title;
@@ -68,6 +69,11 @@ router.put("/:id", auth, async (req, res) => {
     contactFields.favorite = favorite
   } else if (!favorite) {
     contactFields.favorite = false
+  }
+  if (checked) {
+    contactFields.checked = checked
+  } else if (!checked) {
+    contactFields.checked = false
   }
   contactFields.date = Date()   // on update, automatically updates date to current date so react filter moves that item to top
   // console.log(req.params.id, 'id from contact')
