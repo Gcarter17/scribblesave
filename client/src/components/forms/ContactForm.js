@@ -6,10 +6,11 @@ import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
-import RichTextEditor, { EditorValue } from 'react-rte'
-import OnOffBtn from "../forms/OnOffBtn"
+import RichTextEditor from 'react-rte'
+import trimText from './trimText'
 
 const ContactForm = () => {
+
   const contactContext = useContext(ContactContext);
   const { addContact, updateContact, clearCurrent, current } = contactContext;
   // end of hooks INIT
@@ -578,6 +579,11 @@ const ContactForm = () => {
   // }
 
 
+  let textArray = trimText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ", 10, 20, 100);
+  console.log(textArray[0]) //"this is some text";
+  console.log(textArray[1]) //""
+  // not sure whether text should be trimmed at app level, or trimmed when posted to db for another field
+
   return (
     <>
       {/* <span onClick={pushIt}>hello</span> */}
@@ -585,7 +591,6 @@ const ContactForm = () => {
         <h2 className="text-primary">
           {current ? "Edit Scribble" : "Add Scribble"}
         </h2>
-        {checked.toString()}
         <input
           type="text"
           placeholder="Title"
