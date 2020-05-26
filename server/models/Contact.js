@@ -26,8 +26,12 @@ const ContactSchema = mongoose.Schema({
   },
   experience: [
     {
+      // description: {
+      //   type: String
+      // }
       description: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'contacts'
       }
     }
   ],

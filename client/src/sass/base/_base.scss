@@ -124,6 +124,7 @@ img {
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -174,6 +175,9 @@ img {
   color: grey;
   font-size: .8em;
   align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
 // card hover button start

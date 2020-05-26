@@ -76,6 +76,7 @@ const ContactForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(contact)
     if (current === null) {
       addContact(contact);
     } else {
@@ -579,9 +580,9 @@ const ContactForm = () => {
   // }
 
 
-  let textArray = trimText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ", 10, 20, 100);
-  console.log(textArray[0]) //"this is some text";
-  console.log(textArray[1]) //""
+  // let textArray = trimText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ", 10, 20, 100);
+  // console.log(textArray[0]) //"this is some text";
+  // console.log(textArray[1]) //""
   // not sure whether text should be trimmed at app level, or trimmed when posted to db for another field
 
   return (
@@ -676,7 +677,7 @@ const ContactForm = () => {
           </div>
         )}
       </form>
-      <ExperienceForm />
+      <ExperienceForm contact={contact} />
     </>
   );
 };

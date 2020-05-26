@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import ContactContext from "../../context/contact/contactContext";
 
-const ExperienceForm = () => {
+const ExperienceForm = ({ contact }) => {
     const contactContext = useContext(ContactContext);
     const { updateContact
         // ,clearCurrent
@@ -25,6 +25,7 @@ const ExperienceForm = () => {
 
 
     const [formData, setFormData] = useState({
+        _id: '',
         description: ''
     })
 
@@ -34,18 +35,28 @@ const ExperienceForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
+    const onClick = e => {
+        setFormData({ ...formData, description: e._id })
+        // console.log(e._id)
+    }
 
     // console.log(formData)
 
     const onSubmit = (e) => {
         e.preventDefault()
+        // console.log(formData)
         formData._id = current._id
         updateContact(formData)
+        console.log(formData)
+
         setFormData({ description: '' })
     };
 
 
-    // console.log(current)
+    // console.log(current, 'current xp') //both log what the 'current' object
+    // console.log(contact, 'contact xp')
+
+    // console.log(contacts, 'contact xp') //
 
     return (
         <form onSubmit={onSubmit}>
@@ -68,7 +79,7 @@ const ExperienceForm = () => {
                         <img src={`https://www.google.com/s2/favicons?domain=${contact.link}`} />
                     ) : <span />}
                     <div className="card-title">
-                        <h3 className="text-med text-left">
+                        <h3 onClick={() => onClick(contact)} className="text-med text-left">
                             {contact.link ? <a rel="noopener noreferrer" target="_blank" href={contact.link}>{contact.title}</a> : <a>{contact.title}</a>}
                         </h3>
                     </div>
