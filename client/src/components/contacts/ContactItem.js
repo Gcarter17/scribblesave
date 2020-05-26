@@ -92,7 +92,8 @@ const ContactItem = ({ contact, index }) => {
       {/* {checked.toString()} */}
       {checked ? <Editor
         value={content}
-        // onValueChange={code => this.setState({ code })}
+        // onValueChange={null}
+        readOnly={true}
         highlight={code => highlight(code, languages.js)}
         padding={10}
         style={{
