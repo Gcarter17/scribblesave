@@ -80,8 +80,9 @@ router.put("/:id", auth, async (req, res) => {
 
   // console.log(Object.keys(contactFields).length === 0 && contactFields.constructor === Object)
 
-  if (Object.keys(contactFields).length > 2) {
+  if (Object.keys(contactFields).length > 3) {
     try {
+
       let contact = await Contact.findById(req.params.id);
 
       if (!contact) return res.status(404).json({ msg: "Contact not found" });
@@ -111,7 +112,9 @@ router.put("/:id", auth, async (req, res) => {
         return res.status(401).json({ msg: "Not authorized" });
       }
 
-      contact.experience.unshift(req.body)
+      // contact.experience.unshift(req.body)  adds to the array the entire body, which is id and description
+
+      contact.experience.unshift(req.body.description)
       await contact.save()
 
       res.json(contact)

@@ -17,16 +17,39 @@ import {
 //         filtered: state.contacts.sort((a, b) => (a.favorite > b.favorite) ? -1 : 1),
 //       };
 // ------------ filters favorites to be first
+// const func = () => {
+//   let placeHolder = ["5ecc0f9045ba2e6894a3dc23", "5ecc10c50371012344e8c68e", "5ecc10c50371012344e8c68f"]
 
+// const func = () => {
+//   let contactsArr = []
+//   contactsArr = contacts.map((item) => {
+//     return item._id
+//   })
+
+//   let arr = []
+//   contacts.forEach((contact) => {
+//     contact.experience.forEach(element => {
+//       arr.push(element._id)
+//     })
+//   })
+//   // console.log(arr)
+//   contactsArr = contactsArr.filter((item) => {
+//     return !arr.includes(item)
+//   })
+//   console.log(contactsArr) //contactsArr is now filtered from what was in the "experience" arrays
+
+// }
+// func()
 
 export default (state, action) => {
-  // console.log(action.payload)
-  // console.log(action.type, 'action type', action.payload, 'action payload')
+
   switch (action.type) {
     case GET_CONTACTS:
       return {
         ...state,
-        contacts: action.payload.sort((a, b) => a.date - b.date), // sorts based on date
+        // contacts: action.payload.sort((a, b) => a.date - b.date), // sorts based on date
+        contacts: action.payload,
+        // contacts: r.sort((a, b) => a.date - b.date),
         // contacts:action.payload  doesn't offer any sorting except order in which they're organized in DB
         loading: false,
       };

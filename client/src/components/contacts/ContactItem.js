@@ -10,7 +10,7 @@ import 'prismjs/components/prism-javascript';
 
 const ContactItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
-  const { deleteContact, setCurrent, clearCurrent, updateContact } = contactContext;
+  const { deleteContact, setCurrent, clearCurrent, updateContact, contacts } = contactContext;
 
   // useEffect(() => {
   //   setContactState({
@@ -35,7 +35,7 @@ const ContactItem = ({ contact, index }) => {
   // })
 
   // const { _id, title, link, content, checked, favorite, date } = contactState;
-  const { _id, title, link, content, checked, favorite, date } = contact;
+  const { _id, title, link, content, checked, experience, favorite, date } = contact;
 
 
   const theDate = date
@@ -51,7 +51,7 @@ const ContactItem = ({ contact, index }) => {
     setCurrent(contact)
   }
 
-  const dropDown = () => {
+  const dropDown = () => {    // buttons drop login (edit and delete)
     setIsDropped(!isDropped)
     if (!isDropped) {
       setTimeout(function () { setIsDropped(false) }, 5000);
@@ -59,16 +59,23 @@ const ContactItem = ({ contact, index }) => {
   }
   const [isDropped, setIsDropped] = useState(false);
 
-  // inbetween / and / is the symbol to be replaced, and " " is what to replace it with
-  // let newContent = content.replace(/{/g, "<h1>");
-  // let newestContent = newContent.replace(/}/g, "</h1>");
+  const setDrop = () => {   // chevron drop logic
+    setChevronDrop(!chevronDrop)
+  }
+  const [chevronDrop, setChevronDrop] = useState(false)
+
+
+  let contactsArr
+  if (experience.length > 0) {
+    contactsArr = contacts.filter((item) => experience.find(({ _id }) => item._id === _id));
+  }
+  // console.log(contactsArr)
 
   return (
-
-    // <Card id={`card-${index}`} className="card" draggable='true'>
-
-
     <div className="card bg-light">
+      {contactsArr && chevronDrop && contactsArr.map((contact, index) => <ContactItem contact={contact} key={contact.title} index={index} />)}
+
+      {/* <p>{contactsArr}</p> */}
       <div className="card-header">
         {link ? (
           <img src={`https://www.google.com/s2/favicons?domain=${link}`} />
@@ -96,14 +103,21 @@ const ContactItem = ({ contact, index }) => {
         <MyEditor styles={"rte-item py-1"} content={content} id={_id} updateContact={updateContact} readOnly={true} />
 
       }
-
-      {/* <MyEditor /> */}
-
       <p className="card-btm">
         <span
           className={`${favorite ? "fas gold" : "far grey"} fa-star custom-checkbox`}
         />
-        <span className="theDate">{moment(theDate).calendar()}</span>
+        <span className="theDate">
+          {moment(theDate).calendar()}
+          {experience.length > 0 ?
+            <div onClick={setDrop} className={chevronDrop ? 'toggle' : 'toggle active'}>
+              <div class="left"></div>
+              <div class="right"></div>
+            </div>
+            : null}
+
+        </span>
+
         <div className="dropdown">
           {/* <button onMouseEnter={() => dropDown(true)} onMouseLeave={() => dropDown(false)} className="dropbtn">Dropdown</button> */}
           <button onClick={dropDown} className="dropbtn">...</button>
@@ -125,7 +139,6 @@ const ContactItem = ({ contact, index }) => {
         </div>
       </p>
     </div >
-    // </Card>
   );
 };
 
@@ -134,21 +147,3 @@ ContactItem.propTypes = {
 };
 
 export default ContactItem;
-
-
-{/* <DragNDrop id={`board-${index}`} className='board'>
-<Card id={`card-${index}`} className="card" draggable='true'> */}
-
-
-// {/* <div className="flexbox">
-//   <DragNDrop id='board-1' className='board'>
-{/* <Card id="card-1" className="card" draggable='true'>
-  <p>card one</p>
-</Card> */}
-//   </DragNDrop>
-//   <DragNDrop id='board-2' className='board'>
-//     <Card id="card-2" className="card" draggable='true'>
-//       <p>card two</p>
-//     </Card>
-//   </DragNDrop>
-// </div> */}

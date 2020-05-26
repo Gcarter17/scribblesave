@@ -91,7 +91,7 @@ const ContactState = props => {
     };
 
     try {
-      console.log(contact, 'this is the contact')
+      // console.log(contact, 'this is the contact')
       const res = await axios.put(
         `/api/contacts/${contact._id}`,
         contact,

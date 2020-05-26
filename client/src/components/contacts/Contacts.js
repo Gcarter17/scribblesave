@@ -19,6 +19,23 @@ const Contacts = () => {
     return <h4>Please add a Scribble</h4>;
   }
 
+
+  let filteredContacts;
+  if (contacts !== null && contacts.length > 0 && !loading) {
+
+    let arr = []
+    contacts.forEach((contact) => {
+      contact.experience.forEach(element => {
+        arr.push(element)
+      })
+    })
+    // console.log(arr)
+
+    filteredContacts = contacts.filter((item) => !arr.find(({ _id }) => item._id === _id));
+  }
+
+  // console.log(filteredContacts)
+
   return (
     <Fragment>
       {contacts !== null && !loading ? (
@@ -35,7 +52,8 @@ const Contacts = () => {
                   <ContactItem contact={contact} index={index} />
                 </CSSTransition>
               ))
-              : contacts.map((contact, index) => (
+              : filteredContacts.map((contact, index) => (
+                // : contacts.map((contact, index) => (
                 <CSSTransition
                   key={contact._id}
                   timeout={500}
@@ -44,6 +62,7 @@ const Contacts = () => {
                   <ContactItem contact={contact} key={contact.title} index={index} />
                 </CSSTransition>
               ))}
+
 
           </div>
           {/* </DragNDrop> */}
