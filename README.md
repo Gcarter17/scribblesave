@@ -2,7 +2,7 @@
 
 > Full stack MERN (Mongodb, express.js, react, node) note/bookmark manager with React hooks, context & JWT authentication. 
 
-Built on top of Brad Travery's project [here](https://github.com/bradtraversy/contact_keeper_api)
+Built on top of Brad Traversy's project [here](https://github.com/bradtraversy/contact_keeper_api)
 
 ## Usage
 
