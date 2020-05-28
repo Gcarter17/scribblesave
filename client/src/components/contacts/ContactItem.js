@@ -20,8 +20,21 @@ const ContactItem = ({ contact, index }) => {
   const theDate = date;
 
   const onDelete = () => {
-    deleteContact(_id);
-    clearCurrent();
+    let arr = []
+    contacts.forEach((contact) => {
+      contact.experience.forEach(element => {
+        arr.push(element._id)
+      })
+    })
+    // console.log(arr)
+    if (arr.includes(_id)) {
+      alert('first remove card from folder to delete...')
+    } else {
+      deleteContact(_id);
+
+    }
+    console.log(arr.includes(_id), 'array includes id')
+    // clearCurrent();
   };
 
   const setTheCurrent = () => {

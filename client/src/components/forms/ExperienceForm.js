@@ -23,10 +23,10 @@ const ExperienceForm = ({ contact }) => {
 
     const onSubmitAdd = (e) => {
         e.preventDefault()
-        console.log(formData, 'formdata')
+        // console.log(formData, 'formdata')
         formData._id = current._id
         updateContact(formData)
-        console.log(formData)
+        // console.log(formData)
 
         setFormData({ description: '' })
     };

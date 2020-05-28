@@ -71,12 +71,12 @@ const ContactForm = () => {
 
   const checkedChange = (e) => {
     setContact({ ...contact, checked: e.target.checked })
-    console.log(!checked)
+    // console.log(!checked)
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(contact)
+    // console.log(contact)
     if (current === null) {
       addContact(contact);
     } else {
