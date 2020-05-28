@@ -7,7 +7,6 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import RichTextEditor from 'react-rte'
-import trimText from './trimText'
 
 const ContactForm = () => {
 
@@ -40,7 +39,7 @@ const ContactForm = () => {
     favorite: false,
   });
 
-  const { title, link, content, checked, favorite } = contact;
+  const { title, link, content, checked, favorite, experience } = contact;
 
   const onChange = (e) => { // normal input onChange
     if (e.target.type !== "checkbox") {
@@ -49,10 +48,11 @@ const ContactForm = () => {
     } else if (e.target.type) {
       setContact({ ...contact, [e.target.name]: e.target.checked })
 
-    } else {
-      console.log(e)
-
     }
+    // else {
+    //   console.log(e)
+
+    // }
 
   };
 
@@ -90,11 +90,7 @@ const ContactForm = () => {
     setEditorValue(RichTextEditor.createEmptyValue())
   };
 
-  // const [loaded, setLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   setLoaded(true)
-  // });
 
   let matches = <><a HREF="https://www.coursera.org/learn/learning-how-to-learn/lecture/75EsZ/introduction-to-the-focused-and-diffuse-modes"
     ADD_DATE="1571390335"
@@ -578,12 +574,15 @@ const ContactForm = () => {
   //     })
   //   })
   // }
-
-
-  // let textArray = trimText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ", 10, 20, 100);
-  // console.log(textArray[0]) //"this is some text";
-  // console.log(textArray[1]) //""
-  // not sure whether text should be trimmed at app level, or trimmed when posted to db for another field
+  // let exp = experience
+  // if (exp) {
+  //   let index = exp.findIndex(item => item._id === '5ecc450bb3017f339c1bfb0c')
+  //   // let index = exp.indexOf({ _id: '5ecc0f9045ba2e6894a3dc23' })
+  //   // let index = exp.indexOf({ _id: '5ecc450bb3017f339c1bfb0c' })
+  //   // let index = exp.find(item => item._id = '5ecc450bb3017f339c1bfb0c')
+  //   // console.log(exp)
+  //   // console.log(index)
+  // }
 
   return (
     <>

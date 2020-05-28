@@ -23,14 +23,14 @@ import ContactContext from "../../context/contact/contactContext";
 
 
 //     return (
-//         <RichTextEditor
-//             value={editorValue}
-//             onChange={handleChange}
-//             required
-//             type="string"
-//             variant="filled"
-//             style={{ minHeight: 410 }}
-//         />
+{/* <RichTextEditor
+    value={editorValue}
+    onChange={handleChange}
+    required
+    type="string"
+    variant="filled"
+    style={{ minHeight: 410 }}
+/> */}
 //     );
 // }
 

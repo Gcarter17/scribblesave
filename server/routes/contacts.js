@@ -75,6 +75,7 @@ router.put("/:id", auth, async (req, res) => {
   } else if (!checked) {
     contactFields.checked = false
   }
+  if (experience) contactFields.experience = experience
   contactFields.date = Date()   // on update, automatically updates date to current date so react filter moves that item to top
   // console.log(req.params.id, 'id from contact')
 
@@ -112,7 +113,7 @@ router.put("/:id", auth, async (req, res) => {
         return res.status(401).json({ msg: "Not authorized" });
       }
 
-      // contact.experience.unshift(req.body)  adds to the array the entire body, which is id and description
+      // contact.experience.unshift(req.body)  adds to the array the entire body, which is solely the id of the now nested card
 
       contact.experience.unshift(req.body.description)
       await contact.save()
