@@ -1,10 +1,4 @@
-/*  Favorite button start */
 
-  p {
-    input[type="checkbox"] {
-        // display: none;
-    }
-  }
   .custom-checkbox {
     position: relative;
     cursor: pointer;
@@ -17,20 +11,3 @@
   .grey {
     color: grey
   }
-//   .custom-checkbox .glyphicon-star-empty {
-//     color: gray;
-//   }
-  
-//   .custom-checkbox .glyphicon-star {
-//     opacity: 0;
-//     transition: opacity 0.2s ease-in-out;
-//   }
-  
-//   .custom-checkbox:hover .glyphicon-star {
-//     opacity: 0.5;
-//   }
-  
-//   .custom-checkbox input[type="checkbox"]:checked ~ .glyphicon-star {
-//     opacity: 1;
-//   }
-  /*  Favorite button End */

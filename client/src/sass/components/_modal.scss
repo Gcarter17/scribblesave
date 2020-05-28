@@ -1,42 +1,20 @@
-/* Modal start */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-  }
-
-  .ReactModalPortal {
-    position: absolute;
-    z-index: 10;
-
-  }
-  .modal .modal-main {
-    position: fixed;
-    background: white;
-    width: 80%;
-    height: auto;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .display-block {
-    display: block;
-  }
-  
-  .display-none {
-    display: none;
-  }
+.ReactModalPortal {
+  position: absolute;
+  z-index: 10;
+}
   
   .fixed-activate {
     position: fixed;
-    right: 10vh;
+    z-index: 1000;
+    right: 5vw;
     top: 90vh;
   }
 
+@media only screen and (max-width: 700px) {
+    .fixed-activate {
+      right: 10vw;
+    }
+  }
   
   .plus-red,
   .times-red {
@@ -57,12 +35,3 @@
     float: right;
     width: auto;
   }
-  
-  /* Modal End */
-  // @media only screen and (max-width: 700px) {
-  //   .modal-styles {
-  //     width: 100vw;
-  //   }
-  // }
-  
-  

@@ -3,7 +3,8 @@
   border-radius: 10px;
   // height: 15rem;
   height: auto;
-  max-width: 478px !important;
+  // max-width: 478px !important;
+  max-width: 95vw !important;
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
@@ -11,6 +12,11 @@
   position: relative;
   flex-direction: column;
   justify-content: space-between;
+
+}
+
+.grid-grow-2 {
+  grid-column-start: span 2;
 }
 
 .card-content {
@@ -59,6 +65,23 @@
   font-size: 0.8em;
   align-self: flex-end;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding-bottom: 10px;
+}
+
+.readMore {
+  position: absolute;
+  color: #003699;
+  align-self: center;
+  bottom: 50px;
+  cursor: pointer;
+}
+
+.display-none {
+  display: none !important;
+}
+
+.display-true {
+  display: block;
 }

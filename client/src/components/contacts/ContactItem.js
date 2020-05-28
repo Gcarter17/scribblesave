@@ -7,50 +7,15 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
+import trimText from '../forms/trimText'
+import RichTextEditor from 'react-rte';
+
 
 const ContactItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
-  const {
-    deleteContact,
-    setCurrent,
-    clearCurrent,
-    updateContact,
-    contacts,
-  } = contactContext;
+  const { deleteContact, setCurrent, clearCurrent, updateContact, contacts, } = contactContext;
 
-  // useEffect(() => {
-  //   setContactState({
-  //     _id: contact._id,
-  //     title: contact.title,
-  //     link: contact.link,
-  //     content: contact.content,
-  //     checked: contact.checked,
-  //     favorite: contact.favorite,
-  //     date: contact.date
-  //   })
-  // })
-
-  // const [contactState, setContactState] = useState({
-  //   _id: '',
-  //   title: '',
-  //   link: '',
-  //   content: '',
-  //   checked: '',
-  //   favorite: '',
-  //   date: ''
-  // })
-
-  // const { _id, title, link, content, checked, favorite, date } = contactState;
-  const {
-    _id,
-    title,
-    link,
-    content,
-    checked,
-    experience,
-    favorite,
-    date,
-  } = contact;
+  const { _id, title, link, content, checked, experience, favorite, date } = contact;
 
   const theDate = date;
 
@@ -80,24 +45,50 @@ const ContactItem = ({ contact, index }) => {
   };
   const [chevronDrop, setChevronDrop] = useState(false);
 
+  const readMoreLess = () => {
+    // console.log(editorValue.toString('markdown'))
+    // console.log(textArray[0])
+    if (!editorValue.open) {
+      setEditorValue({
+        content: RichTextEditor.createValueFromString(textArray[0].concat(textArray[1]), 'markdown'),
+        open: true
+      })
+
+    } else {
+      setEditorValue({
+        content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
+        open: false
+      })
+
+    }
+  };
+
+  let textArray = trimText(content, 1, 160, 99999);  // min, ideal, max characters
+  const [editorValue, setEditorValue] = useState({
+    content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
+    open: false
+  });
+
+
+
   let contactsArr;
   if (experience.length > 0) {
     contactsArr = contacts.filter((item) =>
       experience.find(({ _id }) => item._id === _id)
     );
   }
-  // console.log(contactsArr)
+  // console.log(!textArray[1])
 
   return (
     <>
-      <div className="card bg-light">
-        {/* <p>{contactsArr}</p> */}
+      {/* <div className={editorValue.toString('markdown') !== textArray[0] ? 'card bg-light flex-grow' : 'card bg-light'}> */}
+      <div className={editorValue.open ? 'card bg-light grid-grow-2' : 'card bg-light'}>
         <div className="card-header">
           {link ? (
             <img src={`https://www.google.com/s2/favicons?domain=${link}`} />
           ) : (
-            <span />
-          )}
+              <span />
+            )}
           <div className="card-title">
             <h3 className="text-med text-left">
               {link ? (
@@ -105,8 +96,8 @@ const ContactItem = ({ contact, index }) => {
                   {title}
                 </a>
               ) : (
-                <a>{title}</a>
-              )}
+                  <a>{title}</a>
+                )}
             </h3>
           </div>
         </div>
@@ -115,34 +106,60 @@ const ContactItem = ({ contact, index }) => {
         {/* <CodeEditor content={content} /> */}
         {/* {checked.toString()} */}
         {checked ? (
-          <Editor
-            value={content}
-            // onValueChange={null}
+          editorValue.open ?
+            <Editor
+              value={textArray[0].concat(textArray[1])}
+              readOnly={true}
+              highlight={(code) => highlight(code, languages.js)}
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 16,
+              }}
+            />
+            :
+            <Editor
+              value={textArray[0]}
+              readOnly={true}
+              highlight={(code) => highlight(code, languages.js)}
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 16,
+              }}
+            />
+        ) :
+          <RichTextEditor
+            value={editorValue.content}
+            required
+            type="string"
+            variant="filled"
             readOnly={true}
-            highlight={(code) => highlight(code, languages.js)}
-            padding={10}
-            style={{
-              fontFamily: '"Fira code", "Fira Mono", monospace',
-              fontSize: 16,
-            }}
-          />
-        ) : (
-          <MyEditor
-            styles={"rte-item py-1"}
-            content={content}
-            id={_id}
-            updateContact={updateContact}
-            readOnly={true}
-          />
-        )}
+            style={{ minHeight: 410 }}
+            className='rte-item py-1'
+          />}
+        {/* <p className={readContent ? 'display-true' : 'display-none'}>{textArray[1]}</p> */}
+        {/* <RichTextEditor
+          value={editorValue}
+          required
+          type="string"
+          variant="filled"
+          readOnly={true}
+          style={{ minHeight: 410 }}
+          className='rte-item py-1'
+        /> */}
         <p className="card-btm">
           <span
             className={`${
               favorite ? "fas gold" : "far grey"
-            } fa-star custom-checkbox`}
+              } fa-star custom-checkbox`}
           />
-          <span className="theDate">
-            {moment(theDate).calendar()}
+          <div className="theDate">
+
+            {textArray[1] && <span onClick={readMoreLess} className='readMore'>{editorValue.open ? 'read less...' : 'read more...'}</span>}
+
+            <span>{moment(theDate).calendar()}</span>
+
             {experience.length > 0 ? (
               <div
                 onClick={setDrop}
@@ -152,8 +169,7 @@ const ContactItem = ({ contact, index }) => {
                 <div class="right"></div>
               </div>
             ) : null}
-          </span>
-
+          </div>
           <div className="dropdown">
             {/* <button onMouseEnter={() => dropDown(true)} onMouseLeave={() => dropDown(false)} className="dropbtn">Dropdown</button> */}
             <button onClick={dropDown} className="dropbtn">
@@ -180,11 +196,11 @@ const ContactItem = ({ contact, index }) => {
             </div>
           </div>
         </p>
-        {contactsArr &&
+        {/* {contactsArr &&
           chevronDrop &&
           contactsArr.map((contact, index) => (
             <ContactItem contact={contact} key={contact.title} index={index} />
-          ))}
+          ))} */}
       </div>
       {contactsArr &&
         chevronDrop &&

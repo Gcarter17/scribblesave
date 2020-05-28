@@ -49,7 +49,6 @@ const Mode = () => {
   return (
     <>
       <span
-        // onClick={() => appContext.setModal(!appContext.openModal)}
         onClick={modalOpen}
         className="fa-stack fixed-activate"
       >
@@ -63,7 +62,6 @@ const Mode = () => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
         <span className="close-btn" onClick={closeModal}>
           <i className="times-red fas fa-times"></i>
         </span>

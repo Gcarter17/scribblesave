@@ -17,11 +17,11 @@
 
 .toggle{
     cursor:pointer;
-    align-self: flex-end;
+    // align-self: flex-end;
+    align-self: center;
     position: absolute;
     bottom: -20px;
     background-color: grey;
-    border: 1px solid grey;
     border-radius: 50%;
     height: 40px;
     width: 40px;
