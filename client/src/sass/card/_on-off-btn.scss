@@ -1,6 +1,4 @@
-
-.button
-{
+.onOffButton {
     position: relative;
     top: 50%;
     width: 110px;
@@ -8,9 +6,6 @@
     background-color: #ccc;
     // margin: -20px auto 0 auto;
     overflow: hidden;
-}
-.button.b2
-{
     border-radius: 2px;
     margin-bottom: 1rem;
 
@@ -36,7 +31,7 @@
     transition: 0.3s ease all;
     z-index: 1;
 }
-#button-16 .knobs:before {
+.onOffButton .knobs:before {
     content: 'TEXT';
     position: absolute;
     top: 4px;
@@ -53,22 +48,22 @@
     border-radius: 2px;
     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
 }
-#button-16 .checkbox:active + .knobs:before {
+.onOffButton .checkbox:active + .knobs:before {
     width: 46px;
 }
 
-#button-16 .checkbox:checked:active + .knobs:before {
+.onOffButton .checkbox:checked:active + .knobs:before {
     margin-left: -26px;
 }
 
-#button-16 .checkbox:checked + .knobs:before {
+.onOffButton .checkbox:checked + .knobs:before {
     content: 'CODE';
     font-size: 15px;
     left: 60px;
     background-color: purple;
 }
 
-#button-16 .checkbox:checked ~ .layer
+.onOffButton .checkbox:checked ~ .layer
 {
     background-color: #fcebeb;
 }

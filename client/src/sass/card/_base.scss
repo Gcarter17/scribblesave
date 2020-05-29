@@ -3,8 +3,8 @@
   border-radius: 10px;
   // height: 15rem;
   height: auto;
-  // max-width: 478px !important;
-  max-width: 95vw !important;
+  max-width: 468px;
+  // max-width: 95vw !important;
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
@@ -15,8 +15,15 @@
 
 }
 
+@media only screen and (max-width: 700px) {
+  .card {
+    max-width: 95vw;
+  }
+}
+
 .grid-grow-2 {
   grid-column-start: span 2;
+  max-width: calc(468px * 2);
 }
 
 .card-content {
