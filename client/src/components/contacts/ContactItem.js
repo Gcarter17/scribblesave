@@ -7,33 +7,46 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
-import trimText from '../forms/trimText'
-import RichTextEditor from 'react-rte';
-
+import trimText from "../forms/trimText";
+import RichTextEditor from "react-rte";
 
 const ContactItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
-  const { deleteContact, setCurrent, clearCurrent, updateContact, contacts, } = contactContext;
+  const {
+    deleteContact,
+    setCurrent,
+    clearCurrent,
+    updateContact,
+    contacts,
+  } = contactContext;
 
-  const { _id, title, link, content, checked, experience, favorite, date } = contact;
+  const {
+    _id,
+    title,
+    link,
+    content,
+    checked,
+    experience,
+    favorite,
+    date,
+  } = contact;
 
   const theDate = date;
 
   const onDelete = () => {
-    let arr = []
+    let arr = [];
     contacts.forEach((contact) => {
-      contact.experience.forEach(element => {
-        arr.push(element._id)
-      })
-    })
+      contact.experience.forEach((element) => {
+        arr.push(element._id);
+      });
+    });
     // console.log(arr)
     if (arr.includes(_id)) {
-      alert('first remove card from folder to delete...')
+      alert("first remove card from folder to delete...");
     } else {
       deleteContact(_id);
-
     }
-    console.log(arr.includes(_id), 'array includes id')
+    console.log(arr.includes(_id), "array includes id");
     // clearCurrent();
   };
 
@@ -63,26 +76,25 @@ const ContactItem = ({ contact, index }) => {
     // console.log(textArray[0])
     if (!editorValue.open) {
       setEditorValue({
-        content: RichTextEditor.createValueFromString(textArray[0].concat(textArray[1]), 'markdown'),
-        open: true
-      })
-
+        content: RichTextEditor.createValueFromString(
+          textArray[0].concat(textArray[1]),
+          "markdown"
+        ),
+        open: true,
+      });
     } else {
       setEditorValue({
-        content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
-        open: false
-      })
-
+        content: RichTextEditor.createValueFromString(textArray[0], "markdown"),
+        open: false,
+      });
     }
   };
 
-  let textArray = trimText(content, 1, 160, 99999);  // min, ideal, max characters
+  let textArray = trimText(content, 1, 160, 99999); // min, ideal, max characters
   const [editorValue, setEditorValue] = useState({
-    content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
-    open: false
+    content: RichTextEditor.createValueFromString(textArray[0], "markdown"),
+    open: false,
   });
-
-
 
   let contactsArr;
   if (experience.length > 0) {
@@ -95,22 +107,30 @@ const ContactItem = ({ contact, index }) => {
   return (
     <>
       {/* <div className={editorValue.toString('markdown') !== textArray[0] ? 'card bg-light flex-grow' : 'card bg-light'}> */}
-      <div className={editorValue.open ? 'card bg-light grid-grow-2' : 'card bg-light'}>
+      <div
+        className={
+          editorValue.open ? "card bg-light grid-grow-2" : "card bg-light"
+        }
+      >
         <div className="card-header">
           {link ? (
             <img src={`https://www.google.com/s2/favicons?domain=${link}`} />
           ) : (
-              <span />
-            )}
+            <span />
+          )}
           <div className="card-title">
             <h3 className="text-med text-left">
               {link ? (
-                <a rel="noopener noreferrer" target="_blank" href={link}>
+                <a
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={link.includes("http") ? link : `//${link}`}
+                >
                   {title}
                 </a>
               ) : (
-                  <a>{title}</a>
-                )}
+                <a>{title}</a>
+              )}
             </h3>
           </div>
         </div>
@@ -119,7 +139,7 @@ const ContactItem = ({ contact, index }) => {
         {/* <CodeEditor content={content} /> */}
         {/* {checked.toString()} */}
         {checked ? (
-          editorValue.open ?
+          editorValue.open ? (
             <Editor
               value={textArray[0].concat(textArray[1])}
               readOnly={true}
@@ -130,7 +150,7 @@ const ContactItem = ({ contact, index }) => {
                 fontSize: 16,
               }}
             />
-            :
+          ) : (
             <Editor
               value={textArray[0]}
               readOnly={true}
@@ -141,7 +161,8 @@ const ContactItem = ({ contact, index }) => {
                 fontSize: 16,
               }}
             />
-        ) :
+          )
+        ) : (
           <RichTextEditor
             value={editorValue.content}
             required
@@ -149,8 +170,9 @@ const ContactItem = ({ contact, index }) => {
             variant="filled"
             readOnly={true}
             style={{ minHeight: 410 }}
-            className='rte-item py-1'
-          />}
+            className="rte-item py-1"
+          />
+        )}
         {/* <p className={readContent ? 'display-true' : 'display-none'}>{textArray[1]}</p> */}
         {/* <RichTextEditor
           value={editorValue}
@@ -165,11 +187,14 @@ const ContactItem = ({ contact, index }) => {
           <span
             className={`${
               favorite ? "fas gold" : "far grey"
-              } fa-star custom-checkbox`}
+            } fa-star custom-checkbox`}
           />
           <div className="theDate">
-
-            {textArray[1] && <span onClick={readMoreLess} className='readMore'>{editorValue.open ? 'read less...' : 'read more...'}</span>}
+            {textArray[1] && (
+              <span onClick={readMoreLess} className="readMore">
+                {editorValue.open ? "read less..." : "read more..."}
+              </span>
+            )}
 
             <span>{moment(theDate).calendar()}</span>
 
