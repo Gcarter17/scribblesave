@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import ContactItem from "./ContactItem";
+import ScribbleItem from "./ScribbleItem";
 import Spinner from "../layout/Spinner";
 import ContactContext from "../../context/contact/contactContext";
 import DragNDrop from "../layout/DragNDrop"
@@ -49,7 +49,7 @@ const Contacts = () => {
                   timeout={500}
                   classNames="item"
                 >
-                  <ContactItem contact={contact} index={index} />
+                  <ScribbleItem contact={contact} index={index} />
                 </CSSTransition>
               ))
               : filteredContacts.map((contact, index) => (
@@ -59,7 +59,7 @@ const Contacts = () => {
                   timeout={500}
                   classNames="item"
                 >
-                  <ContactItem contact={contact} key={contact.title} index={index} />
+                  <ScribbleItem contact={contact} key={contact.title} index={index} />
                 </CSSTransition>
               ))}
 

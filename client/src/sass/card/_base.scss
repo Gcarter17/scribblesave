@@ -35,10 +35,30 @@
   margin-right: -1rem;
   margin-top: 0px;
   margin-bottom: 0;
-  width: calc(100% + 17px);
+  // width: calc(100% + 17px);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+}
+
+.experience-form-headers {
+    margin-right: -1rem;
+    margin-top: 0px;
+    margin-bottom: 0;
+    // width: calc(100% + 17px);
+    // width: 100px;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    img,
+  span {
+    width: 1.2rem;
+    height: 1.2rem;
+    position: relative;
+    top: 4px;
+    margin: 3px 8px 0px 0px;
+  }
 }
 
 .card-title {

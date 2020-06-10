@@ -11,13 +11,21 @@ import trimText from '../forms/trimText'
 import RichTextEditor from 'react-rte';
 
 
-const ContactItem = ({ contact, index }) => {
+const ScribbleItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
-  const { deleteContact, setCurrent, clearCurrent, updateContact, contacts, } = contactContext;
+  const { deleteContact, setCurrent, clearCurrent, updateContact, contacts, current } = contactContext;
 
   const { _id, title, link, content, checked, experience, favorite, date } = contact;
 
   const theDate = date;
+
+  // useEffect(() => {
+  //   // make an if statement that if contact.date is within 5 seconds of the current date, then set editor value
+  //   setEditorValue({
+  //     content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
+  //     open: false
+  //   })
+  // });
 
   const onDelete = () => {
     let arr = []
@@ -38,7 +46,10 @@ const ContactItem = ({ contact, index }) => {
   };
 
   const setTheCurrent = () => {
+    // console.log(contact)
     setCurrent(contact);
+
+
   };
 
   const dropDown = () => {
@@ -76,8 +87,10 @@ const ContactItem = ({ contact, index }) => {
     }
   };
 
-  let textArray = trimText(content, 1, 160, 99999);  // min, ideal, max characters
+  let textArray = trimText(content, 1, 150, 99999);  // min, ideal, max characters
+  // let codeArray = trimText(content, 1, 100, 99999);  // min, ideal, max characters
   const [editorValue, setEditorValue] = useState({
+    // content: RichTextEditor.createValueFromString(trimText(content, 1, 160, 99999)[0], 'markdown'),
     content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
     open: false
   });
@@ -90,7 +103,7 @@ const ContactItem = ({ contact, index }) => {
       experience.find(({ _id }) => item._id === _id)
     );
   }
-  // console.log(!textArray[1])
+  // console.log(!textArray[1], textArray[0], 'text array 1', textArray[1], 'text array 2')
 
   return (
     <>
@@ -121,6 +134,7 @@ const ContactItem = ({ contact, index }) => {
         {checked ? (
           editorValue.open ?
             <Editor
+              // value={trimText(content, 1, 100, 99999)[0].concat(trimText(content, 1, 100, 99999)[1])}
               value={textArray[0].concat(textArray[1])}
               readOnly={true}
               highlight={(code) => highlight(code, languages.js)}
@@ -132,6 +146,7 @@ const ContactItem = ({ contact, index }) => {
             />
             :
             <Editor
+              // value={trimText(content, 1, 100, 99999)[0]}
               value={textArray[0]}
               readOnly={true}
               highlight={(code) => highlight(code, languages.js)}
@@ -218,14 +233,14 @@ const ContactItem = ({ contact, index }) => {
       {contactsArr &&
         chevronDrop &&
         contactsArr.map((contact, index) => (
-          <ContactItem contact={contact} key={contact.title} index={index} />
+          <ScribbleItem contact={contact} key={contact.title} index={index} />
         ))}
     </>
   );
 };
 
-ContactItem.propTypes = {
+ScribbleItem.propTypes = {
   contact: PropTypes.object.isRequired,
 };
 
-export default ContactItem;
+export default ScribbleItem;

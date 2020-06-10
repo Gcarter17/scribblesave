@@ -35,11 +35,17 @@ const Mode = () => {
     setIsOpen(true);
   };
 
-  let arr = document.getElementsByClassName("btn-dark");
-  for (var i = 0; i < arr.length; i++) {
-    arr[i].addEventListener("click", function () {
-      modalOpen();
-    });
+  // let arr = document.getElementsByClassName("btn-dark");
+  // for (var i = 0; i < arr.length; i++) {
+  //   arr[i].addEventListener("click", function () {
+  //     modalOpen();
+  //   });
+  // }
+
+  if (current) {
+    setTimeout(() => {
+      modalOpen()
+    }, 0);
   }
 
   const closeModal = () => {

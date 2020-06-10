@@ -1,38 +1,35 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState } from 'react'
 import ContactContext from "../../context/contact/contactContext";
+import { createGlobalStyle } from 'styled-components'
 
-const OnOffBtn = ({ isChecked }) => {
-
-    const contactContext = useContext(ContactContext);
-    const { current } = contactContext;
-    // end of hooks INIT
-    useEffect(() => {
-        if (current !== null) {
-            setChecked(current.checked)
-            console.log(current)
-        }
-    }, [contactContext, current]);
+const OnOffBtn = ({ darkMode }) => {
 
     const [checked, setChecked] = useState(false)
 
     const onChange = (e) => {
-        // console.log(!e.target.checked)
         setChecked(!checked)
-        isChecked(!checked)
-        // console.log(checked, 'checked')
-        // console.log(e.target.checked, "e.target")
     }
+
+
+    const GlobalStyles = createGlobalStyle`
+  body {
+      background-color: rgba(85, 85, 85, 1.0)
+  }
+  .navbar {
+      background-color: rgba(55, 66, 145, 1.0);
+      border-bottom: 1px solid rgba(55, 66, 145, 1.0);
+  }
+`
+
 
     return (
         <>
-            {/* <div class="toggle-button-cover" /> */}
-            {/* <div class="button-cover"> */}
-            <div class="button b2" id="button-16">
-                <input checked={checked} onChange={onChange} type="checkbox" class="checkbox" />
-                <div class="knobs"></div>
+            {darkMode && checked && < GlobalStyles />}
+            <div class="onOffButton">
+                <input class="checkbox" type="checkbox" checked={checked} onChange={onChange} />
+                <div className={darkMode ? 'knobs darkModeBtn' : 'knobs'}></div>
                 <div class="layer"></div>
-            </div>
-            {/* </div> */}
+            </div >
         </>
     )
 }
