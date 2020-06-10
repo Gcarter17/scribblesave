@@ -109,12 +109,12 @@ const ExperienceForm = ({ contact }) => {
                 <input
                     type="submit"
                     value={"Add"}
-                    className="btn btn-primary btn-block"
+                    className="btn btn-primary btn-modal"
                 />
-                <div className="grid-3">
+                <div className="grid-2 mb-15">
                     {adjustedContacts && adjustedContacts.map((contact, index) =>
                         // {contacts.map((contact, index) =>
-                        <div className="card-header">
+                        <div className="experience-form-headers">
                             {contact.link ? (
                                 <img src={`https://www.google.com/s2/favicons?domain=${contact.link}`} />
                             ) : <span />}
@@ -139,7 +139,7 @@ const ExperienceForm = ({ contact }) => {
                 <input
                     type="submit"
                     value={"Remove"}
-                    className="btn btn-primary btn-block"
+                    className="btn btn-primary btn-modal"
                 />
                 <div className="grid-3">
                     {nestedContacts && nestedContacts.map((contact, index) =>

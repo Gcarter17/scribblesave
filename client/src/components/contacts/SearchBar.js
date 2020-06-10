@@ -26,6 +26,7 @@ const ContactFilter = () => {
   return (
     <>
       <input
+        className='searchbar'
         ref={text}
         type="text"
         placeholder="Search..."

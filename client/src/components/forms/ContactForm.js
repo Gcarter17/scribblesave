@@ -1,13 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
 import MyEditor from "./RichEditor"
-import ExperienceForm from "./ExperienceForm"
+import ChildrenForm from "./ChildrenForm"
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import RichTextEditor from 'react-rte'
-import { createGlobalStyle } from 'styled-components'
 
 const ContactForm = () => {
 
@@ -50,16 +49,10 @@ const ContactForm = () => {
       setContact({ ...contact, [e.target.name]: e.target.checked })
 
     }
-    // else {
-    //   console.log(e)
-
-    // }
-
   };
 
   const onValueChange = (e) => {  // code editor onChange
     setContact({ ...contact, content: e });
-
   }
 
   const [editorValue, setEditorValue] = useState(RichTextEditor.createValueFromString(content, 'html'));
@@ -67,7 +60,6 @@ const ContactForm = () => {
   const handleChange = value => { // react rte onChange
     setEditorValue(value);
     setContact({ ...contact, content: value.toString('markdown') })
-
   };
 
   const checkedChange = (e) => {
@@ -114,15 +106,9 @@ const ContactForm = () => {
   // }
 
 
-  const GlobalStyles = createGlobalStyle`
-  body {
-      background-color: black
-  }
-`
 
   return (
     <>
-      <GlobalStyles />
       {/* <span onClick={pushIt}>hello</span> */}
       <form onSubmit={onSubmit}>
         <h2 className="text-primary">
@@ -197,23 +183,22 @@ const ContactForm = () => {
           />
         </label>
 
-
-        <div>
-          <input
-            type="submit"
-            value={current ? "Update Scribble" : "Add Scribble"}
-            className="btn btn-primary btn-block"
-          />
-        </div>
         {current && (
-          <div>
-            <button className="btn btn-light btn-block" onClick={clearAll}>
+          <div className='children-inline'>
+            <input
+              type="submit"
+              value={current ? "Update Scribble" : "Add Scribble"}
+              className="btn btn-primary"
+            />
+            <button className="btn btn-light" onClick={clearAll}>
               Clear
-          </button>
+            </button>
           </div>
         )}
+
+
       </form>
-      <ExperienceForm contact={contact} />
+      {current && <ChildrenForm contact={contact} />}
     </>
   );
 };
