@@ -182,6 +182,12 @@ const ContactForm = () => {
             checked={!favorite}
           />
         </label>
+        {!current && <input
+          style={{ display: 'block', margin: '0 auto' }}
+          type="submit"
+          value={"Add Scribble"}
+          className="btn btn-primary"
+        />}
 
         {current && (
           <div className='children-inline'>
