@@ -7,15 +7,23 @@ import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
-import trimText from '../forms/trimText'
-import RichTextEditor from 'react-rte';
-
+import trimText from "../forms/trimText";
+import RichTextEditor from "react-rte";
 
 const ScribbleItem = ({ contact, index }) => {
   const contactContext = useContext(ContactContext);
   const { deleteContact, setCurrent, clearCurrent, updateContact, contacts, current } = contactContext;
 
-  const { _id, title, link, content, checked, experience, favorite, date } = contact;
+  const {
+    _id,
+    title,
+    link,
+    content,
+    checked,
+    experience,
+    favorite,
+    date,
+  } = contact;
 
   const theDate = date;
 
@@ -28,20 +36,19 @@ const ScribbleItem = ({ contact, index }) => {
   // });
 
   const onDelete = () => {
-    let arr = []
+    let arr = [];
     contacts.forEach((contact) => {
-      contact.experience.forEach(element => {
-        arr.push(element._id)
-      })
-    })
+      contact.experience.forEach((element) => {
+        arr.push(element._id);
+      });
+    });
     // console.log(arr)
     if (arr.includes(_id)) {
-      alert('first remove card from folder to delete...')
+      alert("first remove card from folder to delete...");
     } else {
       deleteContact(_id);
-
     }
-    console.log(arr.includes(_id), 'array includes id')
+    console.log(arr.includes(_id), "array includes id");
     // clearCurrent();
   };
 
@@ -74,16 +81,17 @@ const ScribbleItem = ({ contact, index }) => {
     // console.log(textArray[0])
     if (!editorValue.open) {
       setEditorValue({
-        content: RichTextEditor.createValueFromString(textArray[0].concat(textArray[1]), 'markdown'),
-        open: true
-      })
-
+        content: RichTextEditor.createValueFromString(
+          textArray[0].concat(textArray[1]),
+          "markdown"
+        ),
+        open: true,
+      });
     } else {
       setEditorValue({
-        content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
-        open: false
-      })
-
+        content: RichTextEditor.createValueFromString(textArray[0], "markdown"),
+        open: false,
+      });
     }
   };
 
@@ -94,8 +102,6 @@ const ScribbleItem = ({ contact, index }) => {
     content: RichTextEditor.createValueFromString(textArray[0], 'markdown'),
     open: false
   });
-
-
 
   let contactsArr;
   if (experience.length > 0) {
@@ -108,7 +114,11 @@ const ScribbleItem = ({ contact, index }) => {
   return (
     <>
       {/* <div className={editorValue.toString('markdown') !== textArray[0] ? 'card bg-light flex-grow' : 'card bg-light'}> */}
-      <div className={editorValue.open ? 'card bg-light grid-grow-2' : 'card bg-light'}>
+      <div
+        className={
+          editorValue.open ? "card bg-light grid-grow-2" : "card bg-light"
+        }
+      >
         <div className="card-header">
           {link ? (
             <img src={`https://www.google.com/s2/favicons?domain=${link}`} />
@@ -118,7 +128,11 @@ const ScribbleItem = ({ contact, index }) => {
           <div className="card-title">
             <h3 className="text-med text-left">
               {link ? (
-                <a rel="noopener noreferrer" target="_blank" href={link}>
+                <a
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={link.includes("http") ? link : `//${link}`}
+                >
                   {title}
                 </a>
               ) : (
@@ -132,7 +146,7 @@ const ScribbleItem = ({ contact, index }) => {
         {/* <CodeEditor content={content} /> */}
         {/* {checked.toString()} */}
         {checked ? (
-          editorValue.open ?
+          editorValue.open ? (
             <Editor
               // value={trimText(content, 1, 100, 99999)[0].concat(trimText(content, 1, 100, 99999)[1])}
               value={textArray[0].concat(textArray[1])}
@@ -144,28 +158,30 @@ const ScribbleItem = ({ contact, index }) => {
                 fontSize: 16,
               }}
             />
-            :
-            <Editor
-              // value={trimText(content, 1, 100, 99999)[0]}
-              value={textArray[0]}
+          ) : (
+              <Editor
+                // value={trimText(content, 1, 100, 99999)[0]}
+                value={textArray[0]}
+                readOnly={true}
+                highlight={(code) => highlight(code, languages.js)}
+                padding={10}
+                style={{
+                  fontFamily: '"Fira code", "Fira Mono", monospace',
+                  fontSize: 16,
+                }}
+              />
+            )
+        ) : (
+            <RichTextEditor
+              value={editorValue.content}
+              required
+              type="string"
+              variant="filled"
               readOnly={true}
-              highlight={(code) => highlight(code, languages.js)}
-              padding={10}
-              style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: 16,
-              }}
+              style={{ minHeight: 410 }}
+              className="rte-item py-1"
             />
-        ) :
-          <RichTextEditor
-            value={editorValue.content}
-            required
-            type="string"
-            variant="filled"
-            readOnly={true}
-            style={{ minHeight: 410 }}
-            className='rte-item py-1'
-          />}
+          )}
         {/* <p className={readContent ? 'display-true' : 'display-none'}>{textArray[1]}</p> */}
         {/* <RichTextEditor
           value={editorValue}
@@ -183,8 +199,11 @@ const ScribbleItem = ({ contact, index }) => {
               } fa-star custom-checkbox`}
           />
           <div className="theDate">
-
-            {textArray[1] && <span onClick={readMoreLess} className='readMore'>{editorValue.open ? 'read less...' : 'read more...'}</span>}
+            {textArray[1] && (
+              <span onClick={readMoreLess} className="readMore">
+                {editorValue.open ? "read less..." : "read more..."}
+              </span>
+            )}
 
             <span>{moment(theDate).calendar()}</span>
 
