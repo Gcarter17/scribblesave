@@ -3,7 +3,8 @@ node_modules/
 # hide config for github, but show for heroku
 
 /client/build
-
+/config
+/configCopy
 .DS_Store
 /client/.env.local
 /client/.env.development.local
