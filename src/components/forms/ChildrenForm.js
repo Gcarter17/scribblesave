@@ -3,9 +3,7 @@ import ContactContext from "../../context/contact/contactContext";
 
 const ExperienceForm = ({ contact }) => {
     const contactContext = useContext(ContactContext);
-    const { updateContact
-        // ,clearCurrent
-        , current, contacts, loading } = contactContext;
+    const { updateContact, current, contacts, loading } = contactContext;
 
     const [formData, setFormData] = useState({
         description: ''

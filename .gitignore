@@ -1,6 +1,7 @@
 node_modules/
 # /config
 # hide config for github, but show for heroku
+# git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch ./config ./configCopy" HEAD      to remove history of config
 
 /client/build
 /config

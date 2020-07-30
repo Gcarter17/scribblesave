@@ -41,7 +41,21 @@ const Contacts = () => {
       {contacts !== null && !loading ? (
         <TransitionGroup>
           {/* <DragNDrop id='board-20' className='board'> */}
+
+           {/* <div className="iframes">
+
+          <iframe name="myFrame" className='iframe'></iframe>
+          <p><a href="http://homebuying.how" target="myFrame">Open HBH</a></p>
+
+          <iframe src='https://www.tutorialrepublic.com/html-tutorial/html-iframes.php' name="myFrametwo" className='iframe'></iframe>
+          <p><a href="http://udemy.com" target="myFrametwo">Open tutorialrepublic</a></p>
+           </div>  */}
+         
           <div className="grid-3">
+
+          
+          {/* <iframe src="https://www.tutorialrepublic.com/html-tutorial/html-iframes.php" style={{height: '800', width: '800'}}></iframe> */}
+
             {filtered !== null
               ? filtered.map((contact, index) => (
                 <CSSTransition
