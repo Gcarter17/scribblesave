@@ -25,10 +25,12 @@ const ContactState = props => {
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
+  // const url = 'http://localhost:5000/scribblesave/us-central1'
+  const url = 'https://us-central1-scribblesave.cloudfunctions.net'
   // Get Contacts
   const getContacts = async () => {
     try {
-      const res = await axios.get('https://us-central1-scribblesave.cloudfunctions.net/api/contacts');
+      const res = await axios.get(`${url}/api/contacts`);
 
       dispatch({
         type: GET_CONTACTS,
@@ -51,7 +53,7 @@ const ContactState = props => {
     };
 
     try {
-      const res = await axios.post('https://us-central1-scribblesave.cloudfunctions.net/api/contacts', contact, config);
+      const res = await axios.post(`${url}/api/contacts`, contact, config);
 
       dispatch({
         type: ADD_CONTACT,
@@ -68,7 +70,7 @@ const ContactState = props => {
   // Delete Contact
   const deleteContact = async id => {
     try {
-      await axios.delete(`https://us-central1-scribblesave.cloudfunctions.net/api/contacts/${id}`);
+      await axios.delete(`${url}/api/contacts/${id}`);
 
       dispatch({
         type: DELETE_CONTACT,
@@ -93,7 +95,7 @@ const ContactState = props => {
     try {
       // console.log(contact, 'this is the contact')
       const res = await axios.put(
-        `https://us-central1-scribblesave.cloudfunctions.net/api/contacts/${contact._id}`,
+        `${url}/api/contacts/${contact._id}`,
         contact,
         config
       );
@@ -103,7 +105,7 @@ const ContactState = props => {
         payload: res.data
       });
       // --------------- temporary fix to re render components after update
-      const response = await axios.get('https://us-central1-scribblesave.cloudfunctions.net/api/contacts');
+      const response = await axios.get(`${url}/api/contacts`);
 
 
       dispatch({

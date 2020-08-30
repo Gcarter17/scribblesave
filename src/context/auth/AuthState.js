@@ -29,12 +29,14 @@ const AuthState = props => {
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  // const url = 'http://localhost:5000/scribblesave/us-central1'
+  const url = 'https://us-central1-scribblesave.cloudfunctions.net'
   // Load User
   const loadUser = async () => {
     setAuthToken(localStorage.token);
 
     try {
-      const res = await axios.get('https://us-central1-scribblesave.cloudfunctions.net/api/auth');
+      const res = await axios.get(`${url}/api/auth`);
 
       dispatch({
         type: USER_LOADED,
@@ -54,7 +56,7 @@ const AuthState = props => {
     };
     console.log(formData, 'formdata')
     try {
-      const res = await axios.post('https://us-central1-scribblesave.cloudfunctions.net/api/users', formData, config);
+      const res = await axios.post(`${url}/api/users`, formData, config);
       // const res = await axios.post('/api/users', formData, config);
 
       dispatch({
@@ -72,35 +74,10 @@ const AuthState = props => {
     }
   };
 
-  // Google Register
-  // const googleRegister = async (name, formData, token) => {
-  //   const config = {
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   };
-  //   try {
-  //     const res = await axios.post('http://localhost:5000/api/users/google', formData, config);
-
-  //     dispatch({
-  //       type: GOOGLE_REGISTER_SUCCESS,
-  //       payload: res.data
-  //     });
-
-  //     loadUser();
-  //   } catch (err) {
-  //     dispatch({
-  //       type: GOOGLE_REGISTER_FAIL,
-  //       payload: err.response.data.msg
-  //     });
-  //   }
-  // };
-
-
   const googleRegister = async () => {
 
     try {
-      const res = await axios.get('https://us-central1-scribblesave.cloudfunctions.net/auth/google');
+      const res = await axios.get(`${url}/auth/google`);
 
       dispatch({
         type: GOOGLE_REGISTER_SUCCESS,
@@ -126,7 +103,7 @@ const AuthState = props => {
     };
 
     try {
-      const res = await axios.post('https://us-central1-scribblesave.cloudfunctions.net/api/auth', formData, config);
+      const res = await axios.post(`${url}/api/auth`, formData, config);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
