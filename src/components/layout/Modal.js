@@ -1,22 +1,31 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
-import ContactForm from "../forms/ContactForm"
-import ContactContext from "../../context/contact/contactContext";
+import ScribbleForm from "../forms/ScribbleForm";
+import ScribbleContext from "../../context/scribble/scribbleContext";
 
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    overflow: 'scroll',
-    maxHeight: '100vh',
-    // marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "calc(100% - 40px)",
-    // width: "calc(100% - 80px)",
-    // width: '100vw',
-    maxWidth: "700px",
+    // top: "50%",
+    // left: "50%",
+    // right: "auto",
+    // bottom: "auto",
+    // overflow: "scroll",
+    // maxHeight: "100vh",
+    // transform: "translate(-50%, -50%)",
+    // width: "calc(100% - 40px)",
+    // maxWidth: "700px",
+    top: "auto",
+    left: "auto",
+    right: "0",
+    bottom: "0",
+    overflow: "scroll",
+    maxHeight: "100vh",
+    // transform: "translate(-50%, -50%)",
+    maxWidth: "400px",
+  },
+  overlay: {
+    // backgroundColor: "rgba(255, 255, 255, 0)",
+    backgroundColor: "rgba(0, 0, 0, .2)",
   },
 };
 
@@ -24,8 +33,8 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const Mode = () => {
-  const contactContext = useContext(ContactContext);
-  const { current, clearCurrent } = contactContext;
+  const scribbleContext = useContext(ScribbleContext);
+  const { current, clearCurrent } = scribbleContext;
   // end of hooks INIT
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -35,29 +44,19 @@ const Mode = () => {
     setIsOpen(true);
   };
 
-  // let arr = document.getElementsByClassName("btn-dark");
-  // for (var i = 0; i < arr.length; i++) {
-  //   arr[i].addEventListener("click", function () {
+  // if (current) {
+  //   setTimeout(() => {
   //     modalOpen();
-  //   });
+  //   }, 0);
   // }
-
-  if (current) {
-    setTimeout(() => {
-      modalOpen()
-    }, 0);
-  }
 
   const closeModal = () => {
     setIsOpen(false);
-    clearCurrent()
+    // clearCurrent();
   };
   return (
     <>
-      <span
-        onClick={modalOpen}
-        className="fa-stack fixed-activate"
-      >
+      <span onClick={modalOpen} className="fa-stack fixed-activate">
         <i className=" fa fa-circle plus-red  fa-stack-2x"></i>
         <i className=" fa fa-plus fa-stack-1x plus-med fa-inverse"></i>
       </span>
@@ -72,7 +71,7 @@ const Mode = () => {
           <i className="times-red fas fa-times"></i>
         </span>
         <div className="form-container">
-          <ContactForm />
+          <ScribbleForm />
         </div>
       </Modal>
     </>

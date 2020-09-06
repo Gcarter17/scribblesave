@@ -1,164 +1,183 @@
 import React, { useState, useContext } from "react";
-import ContactContext from "../../context/contact/contactContext";
+import ScribbleContext from "../../context/scribble/scribbleContext";
 
-const ExperienceForm = ({ contact }) => {
-    const contactContext = useContext(ContactContext);
-    const { updateContact
-        // ,clearCurrent
-        , current, contacts, loading } = contactContext;
+const FoldersForm = ({ scribble }) => {
+  const scribbleContext = useContext(ScribbleContext);
+  const {
+    updateScribble,
+    // ,clearCurrent
+    current,
+    scribbles,
+    loading,
+  } = scribbleContext;
 
-    const [formData, setFormData] = useState({
-        description: ''
-    })
-    const { description } = formData;
+  const [formData, setFormData] = useState({
+    description: "",
+  });
+  const { description } = formData;
 
-    const onChange = e => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const onClick = e => {
-        setFormData({ ...formData, description: e._id })
-        // console.log(e._id)
-    }
+  const onClick = (e) => {
+    setFormData({ ...formData, description: e._id });
+    // console.log(e._id)
+  };
 
-    const onSubmitAdd = (e) => {
-        e.preventDefault()
-        // console.log(formData, 'formdata')
-        formData._id = current._id
-        updateContact(formData)
-        // console.log(formData)
+  const onSubmitAdd = (e) => {
+    e.preventDefault();
+    // console.log(formData, 'formdata')
+    formData._id = current._id;
+    updateScribble(formData);
+    console.log(formData, "formdata for add here");
+    // object with only description and id
 
-        setFormData({ description: '' })
-    };
+    setFormData({ description: "" });
+  };
 
+  const [removeFormData, setRemoveFormData] = useState({
+    description: "",
+  });
 
-    const [removeFormData, setRemoveFormData] = useState({
-        description: ''
-    })
+  const onRemoveChange = (e) => {
+    setRemoveFormData({ ...removeFormData, [e.target.name]: e.target.value });
+  };
 
-    const onRemoveChange = e => {
-        setRemoveFormData({ ...removeFormData, [e.target.name]: e.target.value })
-    }
+  const onRemoveClick = (e) => {
+    setRemoveFormData({ ...removeFormData, description: e._id });
+  };
 
-    const onRemoveClick = e => {
-        setRemoveFormData({ ...removeFormData, description: e._id })
-    }
-
-    const onSubmitRemove = (e) => {
-        e.preventDefault()
-        let cont = contact
-        let thing = contact.experience.filter(item => item._id !== removeFormData.description)
-        cont.experience = thing
-        // removeFormData._id = current._id
-        updateContact(cont)
-        setRemoveFormData({ description: '' })
-        // console.log(cont, 'cont')
-        // console.log(thing, 'thing')
-    };
-
-    // console.log(formData)
-
-
-
-    let filteredContacts        // opposite of below
-    let adjustedContacts        // has the id of the current contact taken out
-    let nestedContacts
-    if (contacts !== null && contacts.length > 0 && !loading) {
-
-        let arr = []
-        contacts.forEach((contact) => {
-            contact.experience.forEach(element => {
-                arr.push(element)
-            })
-        })
-
-        // nestedContacts = contacts.filter((item) => contact.experience.find(({ _id }) => item._id === _id));
-        // nestedContacts = contacts.filter((item) => !arr.find(({ _id }) => item._id === _id));
-
-        filteredContacts = contacts.filter((item) => !arr.find(({ _id }) => item._id === _id));
-        if (current) {
-            adjustedContacts = filteredContacts.filter((item) => {
-                return !item._id.includes(current._id);
-            });
-            nestedContacts = contacts.filter((item) => current.experience.find(({ _id }) => item._id === _id));
-
-        }
-
-
-    }
-
-    // console.log(adjustedContacts, 'adjustedContacts')
-    // console.log(nestedContacts, 'nested contacts')
-
-    // console.log(filteredContacts, 'filteredContacts')
-    // console.log(adjustedContacts, 'adjustedContacts')
-    // console.log(contacts, 'contacts')
-    // console.log(contact.experience, 'contact experience')
-
-    return (
-        <>
-            <form onSubmit={onSubmitAdd}>
-                <input
-                    type="text"
-                    placeholder="Description"
-                    name="description"
-                    value={description}
-                    onChange={onChange}
-                    readOnly
-                />
-                <input
-                    type="submit"
-                    value={"Add"}
-                    className="btn btn-primary btn-modal"
-                />
-                <div className="grid-2 mb-15">
-                    {adjustedContacts && adjustedContacts.map((contact, index) =>
-                        // {contacts.map((contact, index) =>
-                        <div className="experience-form-headers">
-                            {contact.link ? (
-                                <img src={`https://www.google.com/s2/favicons?domain=${contact.link}`} />
-                            ) : <span />}
-                            <div style={{ background: 'inherit' }} className="card-title">
-                                <h3 onClick={() => onClick(contact)} className="text-med text-left">
-                                    <a>{contact.title}</a>
-                                </h3>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </form>
-            <form onSubmit={onSubmitRemove}>
-                <input
-                    type="text"
-                    placeholder="Description"
-                    name="description"
-                    value={removeFormData.description}
-                    onChange={onRemoveChange}
-                    readOnly
-                />
-                <input
-                    type="submit"
-                    value={"Remove"}
-                    className="btn btn-primary btn-modal"
-                />
-                <div className="grid-3">
-                    {nestedContacts && nestedContacts.map((contact, index) =>
-                        // {contacts.map((contact, index) =>
-                        <div className="card-header">
-                            {contact.link ? (
-                                <img src={`https://www.google.com/s2/favicons?domain=${contact.link}`} />
-                            ) : <span />}
-                            <div style={{ background: 'inherit' }} className="card-title">
-                                <h3 onClick={() => onRemoveClick(contact)} className="text-med text-left">
-                                    <a>{contact.title}</a>
-                                </h3>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </form>
-        </>
+  const onSubmitRemove = (e) => {
+    e.preventDefault();
+    let scrib = scribble;
+    let thing = scribble.folders.filter(
+      // previously was a capital F on folders
+      // let thing = scribble.folders.filter(
+      (item) => item._id !== removeFormData.description
     );
+    scrib.Folders = thing;
+
+    updateScribble(scrib);
+    // setRemoveFormData({ description: '' })
+    // checked: false
+    // content: "Different snippets of code to take from↵"
+    // date: "2020-08-30T10:21:01.000Z"
+    // Folders: []
+    // favorite: false
+    // link: ""
+    // title: "Code Folder"
+    // user: "5e7171a2214b7f49906a782e"
+    // __v: 7
+    // _id: "5ecf0b4f933f297018a30803"
+    console.log(scrib, "scrib here");
+    console.log(thing, "thing here");
+  };
+
+  // console.log(formData)
+
+  let filteredScribbles; // opposite of below
+  let adjustedScribbles; // has the id of the current scribble taken out
+  let nestedScribbles;
+  if (scribbles !== null && scribbles.length > 0 && !loading) {
+    let arr = [];
+    scribbles.forEach((scribble) => {
+      scribble.Folders.forEach((element) => {
+        arr.push(element);
+      });
+    });
+
+    filteredScribbles = scribbles.filter(
+      (item) => !arr.find(({ _id }) => item._id === _id)
+    );
+    if (current) {
+      adjustedScribbles = filteredScribbles.filter((item) => {
+        return !item._id.includes(current._id);
+      });
+      nestedScribbles = scribbles.filter((item) =>
+        current.Folders.find(({ _id }) => item._id === _id)
+      );
+    }
+  }
+
+  return (
+    <>
+      <form onSubmit={onSubmitAdd}>
+        <input
+          type="text"
+          placeholder="Description"
+          name="description"
+          value={description}
+          onChange={onChange}
+          readOnly
+        />
+        <input
+          type="submit"
+          value={"Add"}
+          className="btn btn-primary btn-modal"
+        />
+        <div className="grid-2 mb-15">
+          {adjustedScribbles &&
+            adjustedScribbles.map((scribble, index) => (
+              <div className="folders-form-headers">
+                {scribble.link ? (
+                  <img
+                    src={`https://www.google.com/s2/favicons?domain=${scribble.link}`}
+                  />
+                ) : (
+                  <span />
+                )}
+                <div style={{ background: "inherit" }} className="card-title">
+                  <h3
+                    onClick={() => onClick(scribble)}
+                    className="text-med text-left"
+                  >
+                    <a>{scribble.title}</a>
+                  </h3>
+                </div>
+              </div>
+            ))}
+        </div>
+      </form>
+      <form onSubmit={onSubmitRemove}>
+        <input
+          type="text"
+          placeholder="Description"
+          name="description"
+          value={removeFormData.description}
+          onChange={onRemoveChange}
+          readOnly
+        />
+        <input
+          type="submit"
+          value={"Remove"}
+          className="btn btn-primary btn-modal"
+        />
+        <div className="grid-3">
+          {nestedScribbles &&
+            nestedScribbles.map((scribble, index) => (
+              <div className="card-header">
+                {scribble.link ? (
+                  <img
+                    src={`https://www.google.com/s2/favicons?domain=${scribble.link}`}
+                  />
+                ) : (
+                  <span />
+                )}
+                <div style={{ background: "inherit" }} className="card-title">
+                  <h3
+                    onClick={() => onRemoveClick(scribble)}
+                    className="text-med text-left"
+                  >
+                    <a>{scribble.title}</a>
+                  </h3>
+                </div>
+              </div>
+            ))}
+        </div>
+      </form>
+    </>
+  );
 };
 
-export default ExperienceForm;
+export default FoldersForm;

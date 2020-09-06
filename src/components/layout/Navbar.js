@@ -2,14 +2,14 @@ import React, { Fragment, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
-import ContactContext from "../../context/contact/contactContext";
+import ScribbleContext from "../../context/scribble/scribbleContext";
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
-  const contactContext = useContext(ContactContext);
+  const scribbleContext = useContext(ScribbleContext);
 
   const { isAuthenticated, logout, user, loadUser } = authContext;
-  const { clearContacts } = contactContext;
+  const { clearScribbles } = scribbleContext;
 
   useEffect(() => {
     loadUser();
@@ -18,7 +18,7 @@ const Navbar = ({ title, icon }) => {
 
   const onLogout = () => {
     logout();
-    clearContacts();
+    clearScribbles();
   };
 
   const authLinks = (
@@ -46,7 +46,7 @@ const Navbar = ({ title, icon }) => {
 
   return (
     <div className="navbar">
-      <h1>
+      <h1 style={{ marginLeft: "2rem" }}>
         <Link to="/">
           {/* <i className={icon} /> {title} */}
           <i className={icon} /> {title}

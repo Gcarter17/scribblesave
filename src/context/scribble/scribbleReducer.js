@@ -1,85 +1,83 @@
 import {
-  GET_CONTACTS,
-  ADD_CONTACT,
-  DELETE_CONTACT,
+  GET_SCRIBBLES,
+  ADD_SCRIBBLE,
+  DELETE_SCRIBBLE,
   SET_CURRENT,
   CLEAR_CURRENT,
-  UPDATE_CONTACT,
-  FILTER_CONTACTS,
+  UPDATE_SCRIBBLE,
+  FILTER_SCRIBBLES,
   CLEAR_FILTER,
-  CONTACT_ERROR,
-  CLEAR_CONTACTS,
+  SCRIBBLE_ERROR,
+  CLEAR_SCRIBBLES,
 } from "../types";
 
-// case FILTER_CONTACTS:
+// case FILTER_SCRIBBLES:
 //       return {
 //         ...state,
-//         filtered: state.contacts.sort((a, b) => (a.favorite > b.favorite) ? -1 : 1),
+//         filtered: state.scribbles.sort((a, b) => (a.favorite > b.favorite) ? -1 : 1),
 //       };
 // ------------ filters favorites to be first
 // const func = () => {
 //   let placeHolder = ["5ecc0f9045ba2e6894a3dc23", "5ecc10c50371012344e8c68e", "5ecc10c50371012344e8c68f"]
 
 // const func = () => {
-//   let contactsArr = []
-//   contactsArr = contacts.map((item) => {
+//   let scribblesArr = []
+//   scribblesArr = scribbles.map((item) => {
 //     return item._id
 //   })
 
 //   let arr = []
-//   contacts.forEach((contact) => {
-//     contact.experience.forEach(element => {
+//   scribbles.forEach((scribble) => {
+//     scribble.experience.forEach(element => {
 //       arr.push(element._id)
 //     })
 //   })
 //   // console.log(arr)
-//   contactsArr = contactsArr.filter((item) => {
+//   scribblesArr = scribblesArr.filter((item) => {
 //     return !arr.includes(item)
 //   })
-//   console.log(contactsArr) //contactsArr is now filtered from what was in the "experience" arrays
+//   console.log(scribblesArr) //scribblesArr is now filtered from what was in the "experience" arrays
 
 // }
 // func()
 
 export default (state, action) => {
-
   switch (action.type) {
-    case GET_CONTACTS:
+    case GET_SCRIBBLES:
       return {
         ...state,
-        // contacts: action.payload.sort((a, b) => a.date - b.date), // sorts based on date
-        contacts: action.payload,
-        // contacts: r.sort((a, b) => a.date - b.date),
-        // contacts:action.payload  doesn't offer any sorting except order in which they're organized in DB
+        // scribbles: action.payload.sort((a, b) => a.date - b.date), // sorts based on date
+        scribbles: action.payload,
+        // scribbles: r.sort((a, b) => a.date - b.date),
+        // scribbles:action.payload  doesn't offer any sorting except order in which they're organized in DB
         loading: false,
       };
-    case ADD_CONTACT:
+    case ADD_SCRIBBLE:
       return {
         ...state,
-        contacts: [action.payload, ...state.contacts],
+        scribbles: [action.payload, ...state.scribbles],
         loading: false,
       };
-    case UPDATE_CONTACT:
-
+    case UPDATE_SCRIBBLE:
       return {
         ...state,
-        contacts: state.contacts.map((contact) =>
-          contact._id === action.payload._id ? action.payload : contact
+        scribbles: state.scribbles.map((scribble) =>
+          scribble._id === action.payload._id ? action.payload : scribble
         ),
         loading: false,
       };
-    case DELETE_CONTACT:
+    case DELETE_SCRIBBLE:
       return {
         ...state,
-        contacts: state.contacts.filter(
-          (contact) => contact._id !== action.payload
+        scribbles: state.scribbles.filter(
+          (scribble) => scribble._id !== action.payload
         ),
         loading: false,
       };
-    case CLEAR_CONTACTS:
+    case CLEAR_SCRIBBLES:
       return {
         ...state,
-        contacts: null,
+        scribbles: null,
         filtered: null,
         error: null,
         current: null,
@@ -95,13 +93,12 @@ export default (state, action) => {
         current: null,
       };
 
-
-    case FILTER_CONTACTS:
+    case FILTER_SCRIBBLES:
       return {
         ...state,
-        filtered: state.contacts.filter((contact) => {
+        filtered: state.scribbles.filter((scribble) => {
           const regex = new RegExp(`${action.payload}`, "gi");
-          return contact.title.match(regex) || contact.content.match(regex);
+          return scribble.title.match(regex) || scribble.content.match(regex);
         }),
       };
     case CLEAR_FILTER:
@@ -109,7 +106,7 @@ export default (state, action) => {
         ...state,
         filtered: null,
       };
-    case CONTACT_ERROR:
+    case SCRIBBLE_ERROR:
       return {
         ...state,
         error: action.payload,
@@ -118,4 +115,3 @@ export default (state, action) => {
       return state;
   }
 };
-

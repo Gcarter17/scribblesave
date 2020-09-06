@@ -1,13 +1,13 @@
 import React, { useContext, useRef, useEffect } from "react";
-import ContactContext from "../../context/contact/contactContext";
-import DragNDrop from "../layout/DragNDrop"
-import Card from "../layout/Card"
+import ScribbleContext from "../../context/scribble/scribbleContext";
+import DragNDrop from "../layout/DragNDrop";
+import Card from "../layout/Card";
 
-const ContactFilter = () => {
-  const contactContext = useContext(ContactContext);
+const ScribbleFilter = () => {
+  const scribbleContext = useContext(ScribbleContext);
   const text = useRef("");
 
-  const { filterContacts, clearFilter, filtered } = contactContext;
+  const { filterScribbles, clearFilter, filtered } = scribbleContext;
 
   useEffect(() => {
     if (filtered === null) {
@@ -17,7 +17,7 @@ const ContactFilter = () => {
 
   const onChange = (e) => {
     if (text.current.value !== "") {
-      filterContacts(e.target.value);
+      filterScribbles(e.target.value);
     } else {
       clearFilter();
     }
@@ -25,9 +25,8 @@ const ContactFilter = () => {
 
   return (
     <>
-    
       <input
-        className='searchbar'
+        className="searchbar"
         ref={text}
         type="text"
         placeholder="Search..."
@@ -45,4 +44,4 @@ const ContactFilter = () => {
   );
 };
 
-export default ContactFilter;
+export default ScribbleFilter;
