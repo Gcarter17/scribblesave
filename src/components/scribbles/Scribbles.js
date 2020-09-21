@@ -47,22 +47,29 @@ const Scribbles = ({ currentFolder }) => {
     <Fragment>
       {scribbles !== null && !loading ? (
         <div className="scribbles">
-          {filtered !== null
-            ? filtered.map((scribble, index) => (
-                <ScribbleItem
-                  key={scribble._id}
-                  scribble={scribble}
-                  index={index}
-                />
-              ))
-            : filteredScribbles.map((scribble, index) => (
-                // scribbles.map((scribble, index) => (
-                <ScribbleItem
-                  scribble={scribble}
-                  key={scribble._id}
-                  index={index}
-                />
-              ))}
+          {filtered !== null ? (
+            filtered.map((scribble, index) => (
+              <ScribbleItem
+                key={scribble._id}
+                scribble={scribble}
+                index={index}
+              />
+            ))
+          ) : filteredScribbles.length > 0 ? (
+            filteredScribbles.map((scribble, index) => (
+              // scribbles.map((scribble, index) => (
+              <ScribbleItem
+                scribble={scribble}
+                key={scribble._id}
+                index={index}
+              />
+            ))
+          ) : (
+            <p style={{ color: "grey" }}>
+              Looks like this folder is empty... With the folder selected, press
+              the plus icon to start making a new scribble.
+            </p>
+          )}
         </div>
       ) : (
         <Spinner />

@@ -39,13 +39,24 @@ const Dashboard = () => {
 
   const submit = (e) => {
     e.preventDefault();
+    console.log(e.target);
     folders.push(folder);
-    let id = user && user._id;
+    // let id = user && user._id;
     updateUser(user._id, folders);
     setFolder({ title: "" });
   };
 
-  console.log(current, "current here");
+  const remove = (e) => {
+    e.preventDefault();
+    let valid = prompt(`Please retype ${folder.title} to verify its deletion`);
+    if (valid === folder.title) {
+      folders.filter((item) => item.title !== folder.title);
+      updateUser(user._id, folders);
+      setFolder({ title: "" });
+    }
+  };
+
+  // console.log(current, "current here");
 
   // children: Array(1)
   // 0: {type: "text here", _id: "5f5386c625f99b0c540c1822", content: "the content is here"}
@@ -69,7 +80,7 @@ const Dashboard = () => {
   return (
     <div>
       <Mode />
-      <div className="flexTop">
+      {/* <div className="flexTop">
         <ul>
           <li>
             <SearchBar />
@@ -78,7 +89,7 @@ const Dashboard = () => {
             <OnOffBtn darkMode={true} />
           </li>
         </ul>
-      </div>
+      </div> */}
       <div className="dashboard-container">
         <div className="nav-left">
           <div>
@@ -86,9 +97,23 @@ const Dashboard = () => {
               {user &&
                 user.folders.map((folder, index) => (
                   <li
-                    onClick={() => setCurrentFolder(folder)}
+                    onClick={() => {
+                      if (!currentFolder) {
+                        setCurrentFolder(folder);
+                      } else if (currentFolder._id === folder._id) {
+                        setCurrentFolder(null);
+                        setCurrentFolder(folder);
+                      } else {
+                        setCurrentFolder(null);
+                      }
+                    }}
                     // onClick={() => setCurrentFolder(folder.title)}
                     key={index}
+                    className={
+                      currentFolder &&
+                      currentFolder._id === folder._id &&
+                      "folder-active"
+                    }
                     // style={
                     //   currentFolder &&
                     //   currentFolder._id === folder._id && { color: "white" }
@@ -97,14 +122,14 @@ const Dashboard = () => {
                     {folder.title}
                   </li>
                 ))}
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.preventDefault();
                   setCurrentFolder(null);
                 }}
               >
                 Clear current folder!
-              </button>
+              </button> */}
             </ul>
             <form onSubmit={submit}>
               <input
@@ -116,16 +141,29 @@ const Dashboard = () => {
                   // console.log({ ...folders }, "folder obj here");
                 }}
               />
-              <button type="submit">submit</button>
+              <button type="submit">add</button>
+              <button onClick={remove}>remove</button>
             </form>
           </div>
         </div>
         <Scribbles currentFolder={currentFolder} />
         <div className="dashboard-main">
           <div className="dashboard-main-folders">
-            <h3>folder name here</h3>
+            <h3>Folders: </h3>
+            {current ? (
+              current.folders.map((item, index) => {
+                return (
+                  <h3 key={index} style={{ color: "grey" }}>
+                    {item}
+                  </h3>
+                );
+              })
+            ) : (
+              <h3>&nbsp;</h3>
+            )}
+            {/* <h3>folder name here</h3>
             <div>&rsaquo;</div>
-            <h3>folder name here</h3>
+            <h3>folder name here</h3> */}
           </div>
           <div className="dashboard-main-bar">
             <h2>

@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ScribbleContext from "../../context/scribble/scribbleContext";
+import SearchBar from "../scribbles/SearchBar";
+import OnOffBtn from "../forms/OnOffBtn";
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
@@ -52,6 +54,15 @@ const Navbar = ({ title, icon }) => {
           <i className={icon} /> {title}
         </Link>
       </h1>
+      {/* <div className="flexTop"> */}
+      <ul>
+        <li>
+          <SearchBar />
+        </li>
+        <li>
+          <OnOffBtn darkMode={true} />
+        </li>
+      </ul>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   );

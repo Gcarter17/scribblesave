@@ -99,6 +99,10 @@
   div {
     flex-grow: 1;
   }
+  .folder-active {
+    color: rgba(white, 0.5);
+    text-decoration: underline;
+  }
 }
 
 .scribbles {
@@ -106,6 +110,7 @@
   min-height: 600px;
   display: flex;
   flex-direction: column;
+  width: 312px;
   // justify-content: space-around;
 }
 
