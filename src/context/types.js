@@ -28,3 +28,8 @@ export const FILTER_SCRIBBLES = "FILTER_SCRIBBLES";
 export const CLEAR_FILTER = "CLEAR_FILTER";
 
 export const SET_FOLDER = "SET_FOLDER";
+
+export const url = "https://us-central1-scribblesave.cloudfunctions.net"
+
+// "proxy": "http://localhost:5000/scribblesave/us-central1",
+// "proxyComment": "http://localhost:5000/scribblesave/us-central1   https://us-central1-scribblesave.cloudfunctions.net"

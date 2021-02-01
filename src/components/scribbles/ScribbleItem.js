@@ -17,8 +17,9 @@ const ScribbleItem = ({ index, scribble, currentFolder }) => {
 
   const [active, setActive] = useState(false)
 
+
   // const trimmedText = trimText(richContent, 1, 150, 99999)
-  console.log(index)
+  // console.log(index)
   return (
     <div
       className={

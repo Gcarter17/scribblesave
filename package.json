@@ -44,7 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://us-central1-scribblesave.cloudfunctions.net/api",
-  "proxyComment": "http://localhost:5000/scribblesave/us-central1   https://us-central1-scribblesave.cloudfunctions.net/api"
+  }
 }

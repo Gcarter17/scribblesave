@@ -13,6 +13,7 @@ import {
   CLEAR_SCRIBBLES,
   CLEAR_FILTER,
   SCRIBBLE_ERROR,
+  url
 } from "../types";
 
 const ScribbleState = (props) => {
@@ -33,7 +34,7 @@ const ScribbleState = (props) => {
       },
     };
     try {
-      const res = await axios.get(`/api/scribbles`, token, config);
+      const res = await axios.get(`${url}/api/scribbles`, token, config);
       // console.log('res here', res)
       dispatch({
         type: GET_SCRIBBLES,
@@ -58,7 +59,7 @@ const ScribbleState = (props) => {
     };
 
     try {
-      const res = await axios.post(`/api/scribbles`, scribble, config);
+      const res = await axios.post(`${url}/api/scribbles`, scribble, config);
 
       dispatch({
         type: ADD_SCRIBBLE,
@@ -76,7 +77,7 @@ const ScribbleState = (props) => {
   // Delete Scribble
   const deleteScribble = async (id) => {
     try {
-      await axios.delete(`/api/scribbles/${id}`);
+      await axios.delete(`${url}/api/scribbles/${id}`);
 
       dispatch({
         type: DELETE_SCRIBBLE,
@@ -101,7 +102,7 @@ const ScribbleState = (props) => {
     try {
       // console.log(scribble, 'this is the scribble')
       const res = await axios.put(
-        `/api/scribbles/${scribble._id}`,
+        `${url}/api/scribbles/${scribble._id}`,
         scribble,
         config
       );
