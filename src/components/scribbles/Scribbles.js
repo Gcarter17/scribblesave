@@ -3,77 +3,73 @@ import React, { Fragment, useContext, useEffect } from "react";
 import ScribbleItem from "./ScribbleItem";
 import Spinner from "../layout/Spinner";
 import ScribbleContext from "../../context/scribble/scribbleContext";
+import AuthContext from '../../context/auth/authContext'
+import Folder from './Folder'
+import Fade from 'react-reveal/Fade';
 
-const Scribbles = ({ currentFolder }) => {
+
+const Scribbles = () => {
   const scribbleContext = useContext(ScribbleContext);
+  const authContext = useContext(AuthContext)
   const { scribbles, filtered, getScribbles, loading } = scribbleContext;
-
-  useEffect(() => {
-    getScribbles();
-    // eslint-disable-next-line
-  }, []);
+  const { user, currentFolder } = authContext
 
   if (scribbles !== null && scribbles.length === 0 && !loading) {
     return <h4>Please add a Scribble</h4>;
   }
 
-  // let filteredScribbles;
-  // if (scribbles !== null && scribbles.length > 0 && !loading) {
-  //   let arr = [];
-  //   scribbles.forEach((scribble) => {
-  //     scribble.folders.forEach((element) => {
-  //       arr.push(element);
-  //     });
-  //   });
-  //   // console.log(arr)
+  // console.log(scribbles && scribbles[0].folders, 'scribbles here')
+  // console.log(scribbles && scribbles.filter(scrib => scrib.folders.length === 0), 'more scribbles here')
 
-  //   filteredScribbles = scribbles.filter(
-  //     (item) => !arr.find(({ _id }) => item._id === _id)
-  //   );
-  // }
-
-  // console.log(filteredScribbles)
-
-  let filteredScribbles;
-  if (scribbles !== null && scribbles.length > 0 && !loading && currentFolder) {
-    filteredScribbles = scribbles.filter((item) =>
-      item.folders.includes(currentFolder.title)
-    );
-  } else {
-    filteredScribbles = scribbles;
-  }
+  console.log(user && user.folders)
 
   return (
     <Fragment>
-      {scribbles !== null && !loading ? (
-        <div className="scribbles">
-          {filtered !== null ? (
-            filtered.map((scribble, index) => (
-              <ScribbleItem
-                key={scribble._id}
-                scribble={scribble}
-                index={index}
-              />
-            ))
-          ) : filteredScribbles.length > 0 ? (
-            filteredScribbles.map((scribble, index) => (
-              // scribbles.map((scribble, index) => (
-              <ScribbleItem
-                scribble={scribble}
-                key={scribble._id}
-                index={index}
-              />
-            ))
-          ) : (
-            <p style={{ color: "grey" }}>
-              Looks like this folder is empty... With the folder selected, press
-              the plus icon to start making a new scribble.
-            </p>
-          )}
-        </div>
-      ) : (
-        <Spinner />
-      )}
+      {scribbles !== null && !loading ?
+        <Fragment>
+          {
+            user && user.folders.map((item) => {
+              return (
+                <Folder folder={item} title={item.title} >
+                  <div className='scribble-grid' >
+                    {scribbles.filter(scrib => scrib.folders.includes(item.title)).map((scrib, index) => { // scribbles who belong to said folder
+                      return (
+                        <ScribbleItem index={index} currentFolder={currentFolder} scribble={scrib} />
+                      )
+                    })}
+                    <div className="scrrible-item faux-scribble-item" ></div>
+                    <div className="scrrible-item faux-scribble-item" ></div>
+                    <div className="scrrible-item faux-scribble-item" ></div>
+                    <div className="scrrible-item faux-scribble-item" ></div>
+                    <div className="scrrible-item faux-scribble-item" ></div>
+                    <div className="scrrible-item faux-scribble-item" ></div>
+                    <div className="scrrible-item faux-scribble-item" ></div>
+                  </div>
+                </Folder>
+              )
+            })
+          }
+          <Folder title={'Unassigned'} folder={'Unassigned'} >
+            <div className='scribble-grid' >
+              {scribbles.filter(scrib => scrib.folders.length === 0).map((scrib, index) => { // scribbles who belong to said folder
+                return (
+                  <ScribbleItem index={index} scribble={scrib} />
+                )
+              })}
+            </div>
+          </Folder>
+
+          {/* <ul className='extra-folder' >
+            {scribbles.filter(scrib => scrib.folders.length === 0).map((scrib) => { // scribbles who belong to said folder
+              return (
+                <ScribbleItem scribble={scrib} />
+              )
+            })}
+          </ul> */}
+
+        </Fragment>
+
+        : <Spinner />}
     </Fragment>
   );
 };

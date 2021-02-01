@@ -1,30 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
-import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
-import { List, InfiniteLoader } from 'react-virtualized'
-
-
+import AuthContext from "../../context/auth/authContext";
 import GoogleLogin from "react-google-login";
-// import { useGoogleLogin } from 'react-google-login'
+import Navbar from "../../components/layout/Navbar";
 
-const Login = (props) => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
+
   const { setAlert } = alertContext;
-  const {
-    login,
-    error,
-    clearErrors,
-    isAuthenticated,
-    googleRegister,
-  } = authContext;
+  const { register, error, clearErrors, isAuthenticated } = authContext;
+  // const { register, error, clearErrors, isAuthenticated, googleRegister } = authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push("/");
     }
 
-    if (error === "Invalid Credentials") {
+    if (error === "User already exists") {
       setAlert(error, "danger");
       clearErrors();
     }
@@ -32,54 +25,73 @@ const Login = (props) => {
   }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
+    name: "",
     email: "",
     password: "",
+    password2: "",
   });
 
-  const { email, password } = user;
+  const { name, email, password, password2 } = user;
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (email === "" || password === "") {
-      setAlert("Please fill in all fields", "danger");
+    if (name === "" || email === "" || password === "") {
+      setAlert("Please enter all fields", "danger");
+    } else if (password !== password2) {
+      setAlert("Passwords do not match", "danger");
     } else {
-      login({
+      console.log({ name, email, password }, "REG LOGIN OBJECT");
+      register({
+        name,
         email,
         password,
       });
-      googleRegister();
     }
   };
 
-  const responseGoogle = (response) => {
-    console.log(response);
-  };
-  const googleSuccess = (response) => {
+  const buttonClick = (response) => {
+    const name = response.profileObj.name;
     const googleEmail = response.profileObj.email;
     const token = response.accessToken;
-    responseGoogle(response);
-    login({
+    // const obj = { name: name, googleEmail: googleEmail, token: token }
+    // console.log({ name, googleEmail, token }, 'GOOG LOGIN OBJECT')
+    register({
+      name,
       googleEmail,
       token,
     });
+
+    // googleRegister()
   };
 
   return (
     <>
+      <Navbar />
       <div className="form-container">
         <h1>
-          Account <span className="text-primary">Login</span>
+          Account <span className="text-primary">Register</span>
         </h1>
         <GoogleLogin
           clientId="77437234863-qridb0qil70aj57g5sjfc5qb9sjre1nd.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={googleSuccess}
-          onFailure={responseGoogle}
+          buttonText="Register"
+          onSuccess={buttonClick}
+          // onFailure={console.log('failed 1')}
           cookiePolicy={"single_host_origin"}
         />
         <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              value={name}
+              onChange={onChange}
+              required
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -100,20 +112,30 @@ const Login = (props) => {
               value={password}
               onChange={onChange}
               required
+              minLength="6"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password2">Confirm Password</label>
+            <input
+              id="password2"
+              type="password"
+              name="password2"
+              value={password2}
+              onChange={onChange}
+              required
+              minLength="6"
             />
           </div>
           <input
             type="submit"
-            value="Login"
+            value="Register"
             className="btn btn-primary btn-block"
           />
         </form>
-
-
       </div>
-
     </>
   );
 };
 
-export default Login;
+export default Register;

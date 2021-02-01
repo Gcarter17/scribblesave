@@ -18,7 +18,7 @@ export default (state, action) => {
     case SET_FOLDER:
       return {
         ...state,
-        folder: action.payload,
+        currentFolder: action.payload,
       };
     case USER_LOADED:
     case USER_UPDATED:
@@ -50,7 +50,7 @@ export default (state, action) => {
         isAuthenticated: false,
         loading: false,
         user: null,
-        folder: null,
+        currentFolder: null,
         error: action.payload,
       };
     case CLEAR_ERRORS:

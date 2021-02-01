@@ -1,7 +1,6 @@
 @import "abstracts/variables";
 
 @import "base/base"; 
-@import "base/mobile-styles";
 @import "base/standard";
 @import "base/dashboard"
 ;
@@ -16,5 +15,6 @@
 @import "components/modal";
 @import "components/navbar";
 @import "components/rich-editor";
+@import "components/scribble-form";
 
 @import "micro-components/draggable";

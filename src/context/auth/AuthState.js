@@ -20,10 +20,12 @@ import {
   GOOGLE_REGISTER_FAIL,
 } from "../types";
 
+
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
+    currentFolder: null,
     loading: true,
     user: null,
     error: null,
@@ -158,7 +160,7 @@ const AuthState = (props) => {
       value={{
         token: state.token,
         isAuthenticated: state.isAuthenticated,
-        currentFolder: state.folder,
+        currentFolder: state.currentFolder,
         loading: state.loading,
         user: state.user,
         error: state.error,

@@ -1,32 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import RichTextEditor from "react-rte";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+const RichEditor = ({ val, setValue }) => {
 
-const RichEditor = () => {
-
-    const [scribble, setScribble] = useState('')
-
-    const [rteValue, setRteValue] = useState(
-        RichTextEditor.createValueFromString(scribble, "html")
-    );
-
-    const rteOnChange = (value) => {
-        // react rte onChange ===================================================
-        setRteValue(value);
-        setScribble(value.toString("markdown"));
-    };
-
-    console.log(scribble)       // THIS IS THE VALUE TO BE SENT TO THE FORM
 
     return (
-        <RichTextEditor
-            value={rteValue}
-            onChange={rteOnChange}
-            required
-            type="string"
-            variant="filled"
-        // style={{ minHeight: 410 }}
+        <CKEditor
+            editor={ClassicEditor}
+            data={val ? val : ''}
+            onChange={setValue}
         />
     )
 }

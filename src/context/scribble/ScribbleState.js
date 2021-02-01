@@ -25,22 +25,27 @@ const ScribbleState = (props) => {
 
   const [state, dispatch] = useReducer(scribbleReducer, initialState);
 
-  // const url = "http://localhost:5000/scribblesave/us-central1";
-  // const url = "https://us-central1-scribblesave.cloudfunctions.net";
   // Get Scribbles
-  const getScribbles = async () => {
+  const getScribbles = async (token) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     try {
-      const res = await axios.get(`/api/scribbles`);
-
+      const res = await axios.get(`/api/scribbles`, token, config);
+      // console.log('res here', res)
       dispatch({
         type: GET_SCRIBBLES,
         payload: res.data,
       });
     } catch (err) {
-      dispatch({
-        type: SCRIBBLE_ERROR,
-        payload: err.response.msg,
-      });
+      console.log('error here', err)
+
+      // dispatch({
+      //   type: SCRIBBLE_ERROR,
+      //   payload: err.response.msg,
+      // });
     }
   };
 
@@ -62,7 +67,8 @@ const ScribbleState = (props) => {
     } catch (err) {
       dispatch({
         type: SCRIBBLE_ERROR,
-        payload: err.response.msg,
+        payload: err
+        // payload: err.response.msg,
       });
     }
   };

@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-modal";
 import ScribbleForm from "./ScribbleForm";
 import ScribbleContext from "../../context/scribble/scribbleContext";
+import AuthContext from "../../context/auth/authContext";
 
 const customStyles = {
   content: {
@@ -33,9 +34,41 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const Mode = () => {
+  const authContext = useContext(AuthContext);
   const scribbleContext = useContext(ScribbleContext);
-  const { current, clearCurrent } = scribbleContext;
-  // end of hooks INIT
+  const { current, clearCurrent, clearScribbles } = scribbleContext;
+  const { isAuthenticated, logout, user, loadUser, updateUser } = authContext;
+
+
+
+  // ========================= FOLDER SUBMIT AND REMOVE START
+
+  const [folder, setFolder] = useState({
+    title: "",
+    id: ""
+  });
+
+  const contextFolders = user && authContext.user.folders;
+
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+    contextFolders.push(folder);
+    updateUser(user._id, contextFolders);
+    setFolder({ title: "" });
+  };
+  const remove = (e) => {
+    e.preventDefault();
+    updateUser(user._id, contextFolders.filter(item => item.title !== folder.title))
+  };
+  // ========================= FOLDER SUBMIT AND REMOVE END
+
+
+
+  const onLogout = () => {
+    logout();
+    clearScribbles();
+  };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -71,6 +104,28 @@ const Mode = () => {
           <i className="times-red fas fa-times"></i>
         </span>
         <div className="form-container">
+          <br />
+          <br />
+          <a onClick={onLogout} href="#!">
+            <i className="fas fa-sign-out-alt" />{" "}
+            <span className="hide-sm">Logout</span>
+          </a>
+          <br />
+          <br />
+          <form onSubmit={submit}>
+            <input
+              required
+              value={folder.title}
+              onChange={(e) => {
+                setFolder({ ...folder, title: e.target.value });
+              }}
+            />
+            <button type="submit">add</button>
+            <button onClick={remove}>remove</button>
+          </form>
+          <br />
+          <br />
+
           <ScribbleForm />
         </div>
       </Modal>

@@ -3,128 +3,116 @@
   flex-direction: row;
   position: relative;
   height: 100%;
-
-  input {
-    width: 70%;
-    max-width: 200px;
-    display: block;
-    margin: 0 auto;
-  }
-  button {
-    display: block;
-    margin: 0 auto;
-  }
 }
 
-.dashboard-main {
+.layout-main {
+  width: 100%;
+}
+
+.folders-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(33vw, 1fr));
+  grid-auto-rows: minmax(50%, 1fr);
+  // grid-auto-rows: minmax(50vh, 1fr);
+  height: 100%;
+}
+
+.folder {
   flex-grow: 1;
-  //   background-color: lightgrey;
-  margin: 0 1rem;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  // height: 100%;
+  overflow-y: scroll;
+  // background-color: rgba(red, .4);
+  background-color:rgb(73,96,117);
+  border: 2px solid grey;
+  position: relative;
+  
 
-  &-folders {
-    padding: 1rem 1rem 1rem 0;
-    margin-left: -0.5rem;
-    // position: relative;
-
-    h3 {
-      display: inline;
-      padding: 1rem;
-      text-transform: capitalize;
-    }
-    div {
-      display: inline;
-      font-size: 30px;
-      font-weight: bolder;
-      user-select: none;
-      margin-bottom: -10px;
-      //   position: absolute;
-    }
+  /* Track */
+  &::-webkit-scrollbar {
+    width: 10px;
   }
 
-  &-bar {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: white;
-    border-radius: 5px;
-    margin-bottom: 1.5rem;
 
-    h2 {
-      font-size: 18px;
-      text-decoration: underline;
-      text-align: left;
-      max-width: 80%;
-    }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    // background: #888; 
+    background: transparent; 
   }
 
-  &-container {
-    flex-grow: 1;
-    padding: 1.5rem 1rem;
-    border-radius: 50px;
-    background-color: lightblue;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 30%;
-
-    .content {
-      background-color: white;
-      border-radius: 10px;
-      padding: 0.5rem;
-      font-size: 14px;
-      width: 100%;
-      margin-bottom: 1.5rem;
-    }
-
-    .children {
-      flex-grow: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      grid-gap: 0.5rem;
-      margin-bottom: 0.5rem;
-
-      .child {
-        min-height: 250px;
-        height: auto;
-        max-height: 100%;
-        background-color: rgba(white, 0.5);
-      }
-    }
-  }
-}
-
-.nav-left {
-  min-width: 10rem;
-  background-color: grey;
-  display: flex;
-  flex-direction: column;
-  div {
-    flex-grow: 1;
-  }
-  .folder-active {
-    color: rgba(white, 0.5);
-    text-decoration: underline;
-  }
-  ul {
-    padding: 1.5rem 0;
-  }
-
-  li {
-    color: white;
-    padding-left: 1rem;
-    font-size: 20px;
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    // background: #555; 
+    background: white;
   }
 
 }
 
-.scribbles {
-  padding: 1rem;
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  width: 312px;
-  // justify-content: space-around;
+.folder-active {
+  flex-basis: 99%;
+  // background-color: turquoise;
+  background: rgb(73,73,73);
+  width: 100%;
+  min-height: 100%;
+  z-index: 1;
+  position: absolute;
+
 }
+
+.fade-right {
+	animation: 1s fadeRight 0s;
+}
+@keyframes fadeRight {
+	from {
+		opacity: .3;
+		transform: translate3d(-30%, 0,0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0,0,0);
+	}
+}
+
+// https://codepen.io/nicfan139/pen/rdEPdP fading animations
+
+.extra-folder {
+  position: absolute;
+  height: 50px;
+  bottom: 0;
+  z-index: 2;
+  background-color: rgba(black, .2);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+
+  &:hover {
+    height: auto;
+    max-height: 650px;
+  }
+}
+
+.scribble-grid {
+  margin-top: 4rem;
+  padding: 0 2rem 0 2rem;
+
+  display: grid;
+  grid-auto-flow: row;
+  justify-items: center;
+
+  // grid-template-columns: repeat( auto-fit, minmax(270px, 1fr) );
+  // grid-template-rows: 286px;
+  // grid-gap: 1rem .5rem;
+
+  grid-template-columns: repeat( auto-fit, minmax(270px, 1fr) );
+  grid-template-rows: repeat( minmax(3,auto-fit, minmax(270px, 1fr)) );
+  // grid-template-rows: repeat( auto-fit, minmax(270px, 1fr) );
+  grid-gap: .5rem;
+
+
+}
+
+
 
 .flexTop {
   display: flex;

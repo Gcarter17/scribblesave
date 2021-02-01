@@ -3,18 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^24.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.0",
     "axios": "^0.18.1",
     "babel-polyfill": "^6.26.0",
-    "draft-js": "^0.11.6",
     "moment": "^2.25.3",
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.22.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-google-login": "^5.1.1",
     "react-modal": "^3.11.2",
+    "react-reveal": "^1.2.2",
     "react-router-dom": "^5.0.0",
-    "react-rte": "^0.16.1",
     "react-scripts": "^3.4.0",
     "react-simple-code-editor": "^0.11.0",
     "react-transition-group": "^4.0.1",
@@ -44,5 +45,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/scribblesave/us-central1"
+  "proxy": "https://us-central1-scribblesave.cloudfunctions.net/api",
+  "proxyComment": "http://localhost:5000/scribblesave/us-central1   https://us-central1-scribblesave.cloudfunctions.net/api"
 }

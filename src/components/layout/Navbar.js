@@ -56,12 +56,12 @@ const Navbar = ({ title, icon }) => {
       </h1>
       {/* <div className="flexTop"> */}
       <ul>
-        <li>
+        {/* <li>
           <SearchBar />
         </li>
         <li>
           <OnOffBtn darkMode={true} />
-        </li>
+        </li> */}
       </ul>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
