@@ -4,7 +4,6 @@
 :root {
   --primary-color: #003699;
   --dark-color: #333333;
-  --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -19,12 +18,11 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: var(--light-color);
+  background-color: #f4f4f4;
   color: #333;
 }
 
 a {
-  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -47,45 +45,4 @@ img {
   height: 100vh;
   // margin-bottom: 3rem;
   // margin-bottom: 300px;
-}
-
-// when screen is 700px wide or less
-@media only screen and (max-width: 700px) {
-  .page-wrapper {
-    // padding: 0.5rem 0.5rem 3rem 0.5rem;
-  }
-}
-
-/* Grid */
-.grid-1 {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 2rem;
-}
-
-.grid-2 {
-  width: 100%;
-  display: grid;
-  // grid-template-columns: repeat(2, 1fr);
-  grid-template-columns: 50% 50%;
-  grid-gap: 1rem;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  // grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
-}
-
-.grid-2-3 {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-gap: 2rem;
 }

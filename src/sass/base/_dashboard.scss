@@ -100,14 +100,10 @@
   grid-auto-flow: row;
   justify-items: center;
 
-  // grid-template-columns: repeat( auto-fit, minmax(270px, 1fr) );
-  // grid-template-rows: 286px;
-  // grid-gap: 1rem .5rem;
 
   grid-template-columns: repeat( auto-fit, minmax(270px, 1fr) );
   grid-template-rows: repeat( minmax(3,auto-fit, minmax(270px, 1fr)) );
-  // grid-template-rows: repeat( auto-fit, minmax(270px, 1fr) );
-  grid-gap: .5rem;
+  // grid-gap: .5rem;
 
 
 }
