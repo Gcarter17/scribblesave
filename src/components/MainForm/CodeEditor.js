@@ -4,15 +4,7 @@ import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 
-
 const CodeEditor = ({ val, setVal, readOnly }) => {
-    // const [scribble, setScribble] = useState('')
-
-    // const onValueChange = (e) => {
-
-    // };
-
-    // console.log(scribble)
 
     return (
         <Editor
@@ -21,13 +13,12 @@ const CodeEditor = ({ val, setVal, readOnly }) => {
             onValueChange={setVal}
             highlight={(code) => highlight(code, languages.js)}
             padding={10}
-            style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: 16,
-                // border: "1px solid #ccc",
-                // backgroundColor: '#2C303A'
-                backgroundColor: 'white'
-            }}
+            style={readOnly && val === '' ? { backgroundColor: 'transparent' } :
+                {
+                    fontFamily: '"Fira code", "Fira Mono", monospace',
+                    fontSize: 16,
+                    backgroundColor: 'white'
+                }}
         />
     )
 }

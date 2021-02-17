@@ -3,6 +3,7 @@ import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 import GoogleLogin from "react-google-login";
 import Navbar from "../../components/layout/Navbar";
+import StyledBtn from "../styled-components/StyledBtn";
 
 const Register = (props) => {
   const alertContext = useContext(AlertContext);
@@ -73,13 +74,7 @@ const Register = (props) => {
         <h1>
           Account <span className="text-primary">Register</span>
         </h1>
-        <GoogleLogin
-          clientId="77437234863-qridb0qil70aj57g5sjfc5qb9sjre1nd.apps.googleusercontent.com"
-          buttonText="Register"
-          onSuccess={buttonClick}
-          // onFailure={console.log('failed 1')}
-          cookiePolicy={"single_host_origin"}
-        />
+
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -127,11 +122,26 @@ const Register = (props) => {
               minLength="6"
             />
           </div>
-          <input
-            type="submit"
-            value="Register"
-            className="btn btn-primary btn-block"
-          />
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            margin: '0 auto',
+            justifyContent: 'space-evenly',
+            margin: '0 4rem'
+          }}>
+            <GoogleLogin
+              clientId="77437234863-qridb0qil70aj57g5sjfc5qb9sjre1nd.apps.googleusercontent.com"
+              buttonText="Register"
+              onSuccess={buttonClick}
+              // onFailure={console.log('failed 1')}
+              cookiePolicy={"single_host_origin"}
+            />
+            <StyledBtn
+              primary
+              type="submit"
+              value="Register"
+            />
+          </div>
         </form>
       </div>
     </>

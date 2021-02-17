@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
-import { List, InfiniteLoader } from 'react-virtualized'
 import Navbar from "../../components/layout/Navbar";
-
+import StyledBtn from '../styled-components/StyledBtn'
 
 import GoogleLogin from "react-google-login";
 // import { useGoogleLogin } from 'react-google-login'
@@ -76,13 +75,7 @@ const Login = (props) => {
         <h1>
           Account <span className="text-primary">Login</span>
         </h1>
-        <GoogleLogin
-          clientId="77437234863-qridb0qil70aj57g5sjfc5qb9sjre1nd.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={googleSuccess}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
+
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
@@ -106,14 +99,27 @@ const Login = (props) => {
               required
             />
           </div>
-          <input
-            type="submit"
-            value="Login"
-            className="btn btn-primary btn-block"
-          />
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            margin: '0 4rem'
+          }}>
+
+            <GoogleLogin
+              clientId="77437234863-qridb0qil70aj57g5sjfc5qb9sjre1nd.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={googleSuccess}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
+            <StyledBtn
+              primary
+              type="submit"
+              value="Login"
+            />
+          </div>
         </form>
-
-
       </div>
 
     </>

@@ -5,41 +5,20 @@ import moment from "moment";
 import trimText from "../forms/trimText";
 import ScribbleForm from '../MainForm/ScribbleForm'
 import CodeEditor from '../MainForm/CodeEditor'
-import StyledScribbleItem from '../styled-components/StyledScribbleItem'
+import StyledScribbleItem from '../styled-components/Scribbles/StyledScribbleItem'
 
-const ScribbleItem = ({ index, scribble, currentFolder }) => {
+const ScribbleItem = ({ index, scribble, currentFolder, scale }) => {
   const scribbleContext = useContext(ScribbleContext);
 
   const { deleteScribble, setCurrent, clearCurrent, updateScribble, scribbles, current, } = scribbleContext;
   const { _id, title, link, codeContent, richContent, favorite, type, folders, tags, date, } = scribble;
   const innerHtml = () => { return { __html: richContent } }
-  // const trimmedText = trimText(richContent, 1, 150, 99999)
-
-  const [active, setActive] = useState(false)
-
 
   return (
 
-    <div className="scribble-item-container">
-
-      {/* <div
-        className={
-          current && current._id === _id
-            ? "scribble-item scribble-item-selected"
-            : active ? 'scribble-item scribble-item-active' :
-              "scribble-item"
-        }
-        // onMouseOver={() => {
-        //   if (currentFolder) {
-        //     setActive(true)
-        //   }
-        // }}
-        // onMouseOut={() => {
-        //   setActive(false)
-        // }}
-        
-      > */}
+    <div className={scale === 'small' ? 'scribble-item-container small' : scale === 'medium' ? 'scribble-item-container medium' : 'scribble-item-container'} >
       <StyledScribbleItem
+        scale={scale}
         index={index}
         id={_id}
         current={current && current._id}
@@ -69,6 +48,7 @@ const ScribbleItem = ({ index, scribble, currentFolder }) => {
           :
           <Fragment>
             <h6>{title}</h6>
+            {/* <h6>{trimText(title, 1, 10, 10)}</h6> */}
             <div
               className='scribble-content'
               dangerouslySetInnerHTML={innerHtml()}

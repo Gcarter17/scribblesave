@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 // import Editor from 'react-simple-code-editor';
 // import { highlight, languages } from 'prismjs/components/prism-core';
 // import 'prismjs/components/prism-clike';
@@ -8,25 +8,22 @@ import React, { Component } from 'react';
 //   return a + b;
 // }`;
 
-class CodeEditor extends Component {
-    state = { code: this.props.content };
+// class CodeEditor extends Component {
+//     state = { code: this.props.content };
 
-    render() {
-        return (
-            // <Editor
-            //     value={this.state.code}
-            //     onValueChange={code => this.setState({ code })}
-            //     highlight={code => highlight(code, languages.js)}
-            //     padding={10}
-            //     style={{
-            //         fontFamily: '"Fira code", "Fira Mono", monospace',
-            //         fontSize: 16,
-            //     }}
-            // />
-            <div>
-                hello
-            </div>
-        );
-    }
-}
-export default CodeEditor
+//     render() {
+//         return (
+//             <Editor
+//                 value={this.state.code}
+//                 onValueChange={code => this.setState({ code })}
+//                 highlight={code => highlight(code, languages.js)}
+//                 padding={10}
+//                 style={{
+//                     fontFamily: '"Fira code", "Fira Mono", monospace',
+//                     fontSize: 16,
+//                 }}
+//             />
+//         );
+//     }
+// }
+// export default CodeEditor

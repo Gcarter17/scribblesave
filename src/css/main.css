@@ -44,174 +44,15 @@ img {
   height: 100vh;
 }
 
-/* Text Styles*/
-.x-large {
-  font-size: 4rem;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.large {
-  font-size: 3rem;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.lead {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
 .text-primary {
-  color: var(--primary-color);
+  color: #65BE95;
   font-size: 1.4em;
-}
-
-.text-med {
-  color: var(--primary-color);
-  font-size: 1.2em;
-}
-
-.text-dark {
-  color: var(--dark-color);
-  font-size: 0.8em;
-  margin: 0.6rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-left {
-  text-align: left;
-}
-
-/* List */
-.list {
-  margin: 0.5rem 0;
-}
-
-.list li {
-  padding-bottom: 0.3rem;
-}
-
-/* Padding */
-.p {
-  padding: 0.5rem;
-}
-
-.p-1 {
-  padding: 1rem;
-}
-
-.p-2 {
-  padding: 2rem;
-}
-
-.p-3 {
-  padding: 3rem;
-}
-
-.py {
-  padding: 0.5rem 0;
-}
-
-.py-1 {
-  padding: 1rem 0;
-}
-
-.py-2 {
-  padding: 2rem 0;
-}
-
-.py-3 {
-  padding: 3rem 0;
-}
-
-/* Margin */
-.m {
-  margin: 0.5rem;
-}
-
-.m-1 {
-  margin: 1rem;
-}
-
-.m-2 {
-  margin: 2rem;
-}
-
-.m-3 {
-  margin: 3rem;
-}
-
-.my {
-  margin: 0.5rem 0;
-}
-
-.my-1 {
-  margin: 1rem 0;
-}
-
-.my-2 {
-  margin: 2rem 0;
-}
-
-.my-3 {
-  margin: 3rem 0;
-}
-
-.mb-15 {
-  margin-bottom: 1.5rem;
-}
-
-.btn {
-  display: inline-block;
-  background: #f4f4f4;
-  color: #333;
-  padding: 0.4rem 1.3rem;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  -webkit-transition: opacity 0.2s ease-in;
-  transition: opacity 0.2s ease-in;
-  outline: none;
 }
 
 .btn-link {
   background: none;
   padding: 0;
   margin: 0;
-}
-
-.btn-block {
-  display: block;
-  width: 100%;
-}
-
-.btn-sm {
-  font-size: 0.8rem;
-  padding: 0.3rem 1rem;
-  margin-right: 0.2rem;
-}
-
-.badge {
-  font-size: 0.8rem;
-  padding: 0.2rem 0.7rem;
-  text-align: center;
-  margin: 0.3rem;
-  background: #f4f4f4;
-  color: #333;
-  border-radius: 5px;
 }
 
 .alert {
@@ -222,234 +63,14 @@ img {
   color: #333;
 }
 
-.btn-primary,
-.bg-primary,
-.badge-primary,
-.alert-primary {
-  background: var(--primary-color);
-  color: #fff;
-}
-
-.btn-light,
-.bg-light,
-.badge-light,
-.alert-light {
-  background: #d4d4d4;
-  color: #333;
-}
-
-.btn-dark,
-.bg-dark,
-.badge-dark,
-.alert-dark {
-  background: var(--dark-color);
-  color: #fff;
-}
-
-.btn-danger,
-.bg-danger,
-.badge-danger,
 .alert-danger {
   background: var(--danger-color);
   color: #fff;
 }
 
-.btn-success,
-.bg-success,
-.badge-success,
 .alert-success {
   background: var(--success-color);
   color: #fff;
-}
-
-.btn-white,
-.bg-white,
-.badge-white,
-.alert-white {
-  background: #fff;
-  color: #333;
-  border: #ccc solid 1px;
-}
-
-.btn:hover {
-  opacity: 0.8;
-}
-
-.bg-light,
-.badge-light {
-  border: #ccc solid 1px;
-}
-
-.round-img {
-  border-radius: 50%;
-}
-
-.dashboard-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  position: relative;
-  height: 100%;
-}
-
-.layout-main {
-  width: 100%;
-}
-
-.folders-main {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (minmax(33vw, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(33vw, 1fr));
-  grid-auto-rows: minmax(50%, 1fr);
-  height: 100%;
-}
-
-.folder {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  height: 100%;
-  overflow-y: scroll;
-  background-color: #496075;
-  border: 2px solid grey;
-  position: relative;
-  /* Track */
-  /* Handle */
-  /* Handle on hover */
-}
-
-.folder::-webkit-scrollbar {
-  width: 10px;
-}
-
-.folder::-webkit-scrollbar-thumb {
-  background: transparent;
-}
-
-.folder::-webkit-scrollbar-thumb:hover {
-  background: white;
-}
-
-.folder-active {
-  -ms-flex-preferred-size: 99%;
-      flex-basis: 99%;
-  background: #494949;
-  width: 100%;
-  min-height: 100%;
-  z-index: 1;
-  position: absolute;
-}
-
-.fade-right {
-  -webkit-animation: 1s fadeRight 0s;
-          animation: 1s fadeRight 0s;
-}
-
-@-webkit-keyframes fadeRight {
-  from {
-    opacity: .3;
-    -webkit-transform: translate3d(-30%, 0, 0);
-            transform: translate3d(-30%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeRight {
-  from {
-    opacity: .3;
-    -webkit-transform: translate3d(-30%, 0, 0);
-            transform: translate3d(-30%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-}
-
-.extra-folder {
-  position: absolute;
-  height: 50px;
-  bottom: 0;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  overflow: hidden;
-  width: 100%;
-}
-
-.extra-folder:hover {
-  height: auto;
-  max-height: 650px;
-}
-
-.scribble-grid {
-  margin-top: 4rem;
-  padding: 0 2rem 0 2rem;
-  display: -ms-grid;
-  display: grid;
-  grid-auto-flow: row;
-  justify-items: center;
-  -ms-grid-columns: (minmax(270px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  -ms-grid-rows: ()[minmax];
-      grid-template-rows: repeat(minmax(3, auto-fit, minmax(270px, 1fr)));
-}
-
-.flexTop {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: auto;
-  width: 100%;
-  z-index: 1;
-  opacity: 0.9;
-  margin-bottom: 1rem;
-}
-
-.flexTop ul {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.flexTop ul li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 0.5rem;
-}
-
-.flexTop ul li:first-child {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  min-width: 300px;
-}
-
-.flexTop ul li:last-child {
-  margin: 0;
 }
 
 .searchbar {
@@ -483,6 +104,14 @@ img {
   margin-left: 1rem;
 }
 
+.medium {
+  height: 106px !important;
+}
+
+.small {
+  height: 66px !important;
+}
+
 .custom-checkbox {
   position: relative;
   cursor: pointer;
@@ -495,149 +124,6 @@ img {
 
 .grey {
   color: grey;
-}
-
-/* PrismJS 1.16.0
-https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+graphql+jsx+regex */
-/**
- * prism.js default theme for JavaScript, CSS and HTML
- * Based on dabblet (http://dabblet.com)
- * @author Lea Verou
- */
-code[class*="language-"],
-pre[class*="language-"] {
-  color: black;
-  background: none;
-  text-shadow: 0 1px white;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  font-size: 1em;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-  -webkit-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-pre[class*="language-"]::-moz-selection,
-pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection,
-code[class*="language-"] ::-moz-selection {
-  text-shadow: none;
-  background: #b3d4fc;
-}
-
-pre[class*="language-"]::selection,
-pre[class*="language-"] ::selection,
-code[class*="language-"]::selection,
-code[class*="language-"] ::selection {
-  text-shadow: none;
-  background: #b3d4fc;
-}
-
-@media print {
-  code[class*="language-"],
-  pre[class*="language-"] {
-    text-shadow: none;
-  }
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
-  overflow: auto;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  background: #f5f2f0;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: 0.1em;
-  border-radius: 0.3em;
-  white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: slategray;
-}
-
-.token.punctuation {
-  color: #999;
-}
-
-.namespace {
-  opacity: 0.7;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  color: #905;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: #690;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  color: #9a6e3a;
-  background: inherit;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  color: #07a;
-}
-
-.token.function,
-.token.class-name {
-  color: #dd4a68;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  color: #e90;
-}
-
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-
-.token.italic {
-  font-style: italic;
-}
-
-.token.entity {
-  cursor: help;
 }
 
 /* Forms */
@@ -776,6 +262,7 @@ table th {
   color: #fa1762;
   -webkit-transform: scale(1.6);
           transform: scale(1.6);
+  cursor: pointer;
 }
 
 .times-red:hover {
@@ -793,57 +280,6 @@ table th {
 .close-btn {
   float: right;
   width: auto;
-}
-
-/* Navbar */
-.navbar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0.7rem 2rem;
-  z-index: 1;
-  width: 100%;
-  border-bottom: solid 1px var(--primary-color);
-  background: var(--primary-color);
-  opacity: 0.9;
-}
-
-.navbar a,
-.navbar li {
-  color: #fff;
-  padding: 0.45rem;
-  margin: 0 0.25rem;
-}
-
-.navbar ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.navbar a:hover {
-  color: #f4f4f4;
-}
-
-.rte-item {
-  border: none !important;
-  background-color: inherit !important;
-  font-family: inherit;
-  z-index: 0;
-}
-
-.rte-form {
-  font-family: inherit;
-  z-index: 0;
-  padding-bottom: 3rem;
-  height: 100%;
-  background: transparent;
 }
 
 .scribbleForm-input-container {

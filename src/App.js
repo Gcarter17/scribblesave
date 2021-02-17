@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/layout/Navbar";
 import Dashboard from "./components/pages/Dashboard";
 import About from "./components/pages/About";
 import Register from "./components/pages/Register";
@@ -12,6 +11,7 @@ import ScribbleState from "./context/scribble/ScribbleState";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import "./css/main.css";
+import "./css/prism.css";
 
 const App = () => {
   return (
