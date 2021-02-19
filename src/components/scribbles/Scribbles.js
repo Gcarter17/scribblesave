@@ -46,7 +46,7 @@ const Scribbles = () => {
                   )
                 })}
                 {fauxScribbles()}
-                {/* <ScribbleAdd scale={item.scale} /> */}
+                <ScribbleAdd scale={item.scale} folder={item} currentFolder={currentFolder} />
               </StyledScribbleGrid>
             </Folder>
           )

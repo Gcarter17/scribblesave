@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { expand, expandSmall, expandMedium, contract, contractSmall, contractMedium } from '../animations'
+import { expandSmall, expandMedium, expandLarge, contractSmall, contractMedium, contractLarge } from '../animations'
 import { variables } from '../variables'
 
 
@@ -67,7 +67,7 @@ const scalingCss = (props) => {
       css`
         width: 270px;
         height: 270px;
-        animation: ${contract} .5s forwards ;
+        animation: ${contractLarge} .5s forwards ;
         
         h6 {
           font-size: 1.5rem;
@@ -78,7 +78,7 @@ const scalingCss = (props) => {
         ${props => props.currentFolder && css`
           &:hover {
           animation-delay: .42s;
-          animation: ${expand} .4s forwards;
+          animation: ${expandLarge} .4s forwards;
           backface-visibility: hidden;
           transform: translateZ(0) scale(1.0, 1.0);
           }

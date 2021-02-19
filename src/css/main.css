@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #f4f4f4;
@@ -81,6 +81,29 @@ img {
   font-size: 1.2rem;
   border: 1px solid #ccc;
   font-family: "Roboto", sans-serif;
+}
+
+.npm__react-simple-code-editor__textarea {
+  margin-bottom: 1rem !important;
+}
+
+.npm__react-simple-code-editor__textarea:focus {
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1) inset, 0 0;
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1) inset, 0 0;
+}
+
+.ck {
+  border-radius: 5px !important;
+  margin-bottom: 1rem;
+}
+
+.ck-content {
+  min-height: 150px;
+}
+
+.ck-focused {
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1) inset, 0 0;
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1) inset, 0 0;
 }
 
 .faux-scribble-item {
@@ -280,106 +303,4 @@ table th {
 .close-btn {
   float: right;
   width: auto;
-}
-
-.scribbleForm-input-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.scribbleForm-title, .scribbleForm-link, .scribbleForm-content {
-  background: transparent;
-}
-
-.scribbleForm-title:focus, .scribbleForm-link:focus, .scribbleForm-content:focus {
-  background: rgba(0, 0, 255, 0.2);
-}
-
-.scribbleForm-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.scribbleForm-content, .scribbleForm-link {
-  font-size: 18px;
-}
-
-body {
-  background: #f3f1f2;
-  font-family: sans-serif;
-}
-
-.tester {
-  margin: 1rem 4rem;
-}
-
-.tester .ql-container {
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
-  background: #fefcfc;
-}
-
-/* Snow Theme */
-.tester .ql-snow.ql-toolbar {
-  display: block;
-  background: #eaecec;
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
-}
-
-/* Bubble Theme */
-.tester .ql-bubble .ql-editor {
-  border: 1px solid #ccc;
-  border-radius: 0.5em;
-}
-
-.tester .ql-editor {
-  min-height: 18em;
-}
-
-.themeSwitcher {
-  margin-top: 0.5em;
-  font-size: small;
-}
-
-.flexbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  width: 100%;
-  max-width: 768px;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0 auto;
-  padding: 15px;
-}
-
-.flexbox .board {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 100%;
-  max-width: 300px;
-  background-color: grey;
-  padding: 15px;
-}
-
-.flexbox .board .card {
-  padding: 15px 25px;
-  background-color: white;
-  cursor: pointer;
-  margin-bottom: 15px;
 }

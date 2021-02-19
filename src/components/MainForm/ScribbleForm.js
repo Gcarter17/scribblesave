@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import ScribbleContext from "../../context/scribble/scribbleContext";
 import AuthContext from "../../context/auth/authContext";
-import ChildrenForm from "../forms/ChildrenForm";
 import RichEditor from "./RichEditor";
 import CodeEditor from './CodeEditor'
+import StyledInput from "../styled-components/StyledInput";
 
 
 const ScribbleForm = () => {
@@ -90,34 +90,11 @@ const ScribbleForm = () => {
               </>
             );
           })}
-        <div className="scribbleForm-input-container">
-          <input
-            type="text"
-            placeholder="Title"
-            name="title"
-            className='scribbleForm-title'
-            value={title}
-            onChange={onChange}
-          />
-          <input
-            type="text"
-            placeholder="Link"
-            name="link"
-            className='scribbleForm-link'
-            value={link}
-            onChange={onChange}
-          />
-          {/* <textarea
-            type="text"
-            placeholder="Content"
-            name="content"
-            className='scribbleForm-content'
-            value={content}
-            onChange={onChange}
-          /> */}
-
-
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <StyledInput type="text" placeholder="Title" name="title" value={title} onChange={onChange} />
+          <StyledInput type="text" placeholder="Link (optional)" name="link" value={link} onChange={onChange} />
           <RichEditor
+            placeholder={'Description'}
             setValue={(e, editor) => {
               let innerData = editor.getData()
               setScribble({ ...scribble, richContent: innerData })
@@ -125,6 +102,7 @@ const ScribbleForm = () => {
             val={richContent}
           />
           <CodeEditor
+            placeholder={'Code'}
             val={codeContent}
             setVal={(e) => {
               setScribble({ ...scribble, codeContent: e })
@@ -169,9 +147,6 @@ const ScribbleForm = () => {
               value={current ? "Update" : "Add Scribble"}
               className="btn btn-primary"
             />
-            {/* <button className="btn btn-light" onClick={clearAll}>
-              Clear
-            </button> */}
             <button
               className="btn btn-light"
               onClick={() => { deleteScribble(current && current._id) }}
