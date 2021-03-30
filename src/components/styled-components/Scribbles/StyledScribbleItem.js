@@ -38,7 +38,7 @@ const scalingCss = (props) => {
     width: 270px;
     height: 90px;
     padding-top: .5rem !important;
-    animation: ${contractMedium} .5s forwards ;
+    /* animation: ${contractMedium} .5s forwards ; */
     h6 {
       font-size: 1rem;
       margin-bottom: .3rem;
@@ -56,7 +56,7 @@ const scalingCss = (props) => {
     ${props => props.currentFolder && css`
       &:hover {
         animation-delay: .42s;
-        animation: ${expandMedium} .4s forwards;
+        /* animation: ${expandMedium} .4s forwards; */
         backface-visibility: hidden;
         transform: translateZ(0) scale(1.0, 1.0);
       }
@@ -67,7 +67,7 @@ const scalingCss = (props) => {
       css`
         width: 270px;
         height: 270px;
-        animation: ${contractLarge} .5s forwards ;
+        /* animation: ${contractLarge} .5s forwards ; */
         
         h6 {
           font-size: 1.5rem;
@@ -78,7 +78,7 @@ const scalingCss = (props) => {
         ${props => props.currentFolder && css`
           &:hover {
           animation-delay: .42s;
-          animation: ${expandLarge} .4s forwards;
+          /* animation: ${expandLarge} .4s forwards; */
           backface-visibility: hidden;
           transform: translateZ(0) scale(1.0, 1.0);
           }

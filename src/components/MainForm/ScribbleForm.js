@@ -62,6 +62,19 @@ const ScribbleForm = () => {
 
   return (
     <div className='scribbleForm' >
+      {/* <select onChange={(e) => {setScribble({...scribble, folders: [...folders, item.title]})}}>
+      {!current && authContext.user &&
+          authContext.user.folders.map((item) => {
+            return (
+              <option>{item.title}</option>
+            );
+          })}
+      </select> */}
+      <select>
+        <option>testing</option>
+        <option>testing 2</option>
+      </select>
+      {/* ///////////////////////////// */}
       <form onSubmit={onSubmit}>
         {/* FOLDERS HERE, MAKE SURE TO REACTIVATE ========================================================== */}
         {!current && authContext.user &&

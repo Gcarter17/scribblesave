@@ -6,7 +6,9 @@ export default styled.div`
 
   flex-grow: 1;
   height: 100%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  overflow-y: ${props => props.isActive ? 'scroll' : 'hidden'};
+
   background-color: ${variables.colorFolders};
   border: 2px solid grey;
   position: relative;

@@ -40,6 +40,7 @@ const Folder = (props) => {
                     setCurrentFolder(props.folder);
                 }
             }}
+            isActive={active}
         >
             <div style={{
                 display: 'flex',
