@@ -8,6 +8,15 @@ import StyledInput from "../styled-components/StyledInput";
 
 const ScribbleForm = () => {
   const authContext = useContext(AuthContext);
+  const { currentFolder, setCurrentFolder, user, updateUser } = authContext
+
+  useEffect(() => {
+    if (currentFolder) {
+      setScribble({...scribble, folders: [currentFolder.title]})
+    } else {
+      setScribble({...scribble, folders: [user.folders[0].title]})
+    }
+  }, [currentFolder])
 
   const scribbleContext = useContext(ScribbleContext);
   const {
@@ -62,22 +71,17 @@ const ScribbleForm = () => {
 
   return (
     <div className='scribbleForm' >
-      {/* <select onChange={(e) => {setScribble({...scribble, folders: [...folders, item.title]})}}>
-      {!current && authContext.user &&
-          authContext.user.folders.map((item) => {
-            return (
-              <option>{item.title}</option>
-            );
-          })}
-      </select> */}
-      <select>
-        <option>testing</option>
-        <option>testing 2</option>
-      </select>
-      {/* ///////////////////////////// */}
       <form onSubmit={onSubmit}>
-        {/* FOLDERS HERE, MAKE SURE TO REACTIVATE ========================================================== */}
-        {!current && authContext.user &&
+        <select style={current && {display: 'none'}} onChange={(e) => {setScribble({...scribble, folders: [e.target.value]})}}>
+          {!current && authContext.user &&
+            authContext.user.folders.map((item) => {
+              return (
+                  <option selected={item.title && currentFolder && item.title === currentFolder.title ? true : false}>{item.title}</option>
+              );
+            })
+          }
+        </select>
+        {/* {!current && authContext.user &&
           authContext.user.folders.map((item) => {
             return (
               <>
@@ -102,7 +106,7 @@ const ScribbleForm = () => {
                 <label htmlFor={item.title}>{item.title}</label>
               </>
             );
-          })}
+          })} */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <StyledInput type="text" placeholder="Title" name="title" value={title} onChange={onChange} />
           <StyledInput type="text" placeholder="Link (optional)" name="link" value={link} onChange={onChange} />

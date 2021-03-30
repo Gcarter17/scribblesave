@@ -8,8 +8,8 @@ import AuthContext from "../../context/auth/authContext";
 const Spinner = () => {
   const authContext = useContext(AuthContext);
   const scribbleContext = useContext(ScribbleContext);
-  const { current, clearCurrent, clearScribbles } = scribbleContext;
-  const { isAuthenticated, logout, user, loadUser, updateUser } = authContext;
+  const { clearScribbles } = scribbleContext;
+  const { logout } = authContext;
 
   const onLogout = () => {
     logout();
