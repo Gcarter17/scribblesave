@@ -5,6 +5,7 @@ import AuthContext from "../../context/auth/authContext";
 import ScribbleContext from "../../context/scribble/scribbleContext";
 import StyledFolders from "../styled-components/Folders/StyledFolders";
 import Spinner from "../layout/Spinner";
+import Navbar from "../../components/layout/Navbar";
 
 
 const Dashboard = () => {
@@ -47,7 +48,8 @@ const Dashboard = () => {
 
   return (
     <Fragment>
-      {scribbles !== null && !loading &&
+      <Navbar />
+          {scribbles !== null && !loading &&
         <Mode />
       }
       <div style={{
@@ -56,7 +58,6 @@ const Dashboard = () => {
         position: 'relative',
         height: '100%',
       }} >
-
         {scribbles !== null && !loading ?
           <StyledFolders>
             <Scribbles />

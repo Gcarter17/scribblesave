@@ -37,9 +37,7 @@ const Mode = () => {
   const authContext = useContext(AuthContext);
   const scribbleContext = useContext(ScribbleContext);
   const { current, clearCurrent, clearScribbles } = scribbleContext;
-  const { isAuthenticated, logout, user, loadUser, updateUser } = authContext;
-
-
+  const { currentFolder, isAuthenticated, logout, user, loadUser, updateUser } = authContext;
 
   // ========================= FOLDER SUBMIT AND REMOVE START
 
@@ -104,28 +102,19 @@ const Mode = () => {
           <i className="times-red fas fa-times"></i>
         </span>
         <div className="form-container">
-          <br />
-          <br />
-          <a onClick={onLogout} href="#!">
-            <i className="fas fa-sign-out-alt" />{" "}
-            <span className="hide-sm">Logout</span>
-          </a>
-          <br />
-          <br />
           <form onSubmit={submit}>
-            <input
-              required
-              value={folder.title}
-              onChange={(e) => {
-                setFolder({ ...folder, title: e.target.value });
-              }}
-            />
+            <select style={current && {display: 'none'}} onChange={(e) => {setFolder({...folder, title: e.target.value})}}>
+              {!current && authContext.user &&
+                authContext.user.folders.map((item) => {
+                  return (
+                      <option selected={item.title && currentFolder && item.title === currentFolder.title ? true : false}>{item.title}</option>
+                  );
+                })
+              }
+            </select>
             <button type="submit">add</button>
             <button onClick={remove}>remove</button>
           </form>
-          <br />
-          <br />
-
           <ScribbleForm />
         </div>
       </Modal>
